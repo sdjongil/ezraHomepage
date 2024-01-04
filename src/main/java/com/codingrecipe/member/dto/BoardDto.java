@@ -17,4 +17,5 @@ public class BoardDto {
     private String boardContents;
     private int boardHits;
     private Timestamp boardCreatedTime;
+    private int views;
 }

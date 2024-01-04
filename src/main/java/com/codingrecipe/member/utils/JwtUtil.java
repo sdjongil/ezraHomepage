@@ -11,11 +11,11 @@ import java.util.Date;
 
 public class JwtUtil {
 
-    public  static String createJwt(String userEmail, String secretKey, Long expireMs){
+    public  static String createJwt(String nickName, String secretKey, Long expireMs){
         //일종의 map형태의 보관함 이게 토큰
         Claims claims = Jwts.claims();
         //여기에 토큰에 사용자 이메일 정보가 들어감
-        claims.put("userEmail", userEmail);
+        claims.put("nickName", nickName);
         String logInToken = Jwts.builder()
                 .setClaims(claims)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
@@ -40,7 +40,7 @@ public class JwtUtil {
                 .setSigningKey(secretKey)
                 .parseClaimsJws(token)
                 .getBody();
-        return claims.get("userEmail", String.class);
+        return claims.get("nickName", String.class);
     }
     public static HttpHeaders logOutJwt(){
         HttpHeaders headers = new HttpHeaders();

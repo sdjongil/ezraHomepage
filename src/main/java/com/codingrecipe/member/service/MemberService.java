@@ -16,12 +16,12 @@ public class MemberService implements IF_MemberService {
         return memberRepository.save(memberDto);
     }
     @Override
-    public boolean login(MemberDto memberDto) {
+    public MemberDto login(MemberDto memberDto) {
         MemberDto loginMember = memberRepository.login(memberDto);
         if(loginMember != null){
-            return true;
+            return loginMember;
         }else{
-            return false;
+            return loginMember;
         }
     }
     @Override

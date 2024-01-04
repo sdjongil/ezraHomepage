@@ -49,9 +49,9 @@ public class MemberController {
     @ResponseBody
     public String login(@ModelAttribute MemberDto memberDto,
                         HttpServletResponse httpServletResponse){
-        boolean loginResult = memberService.login(memberDto);
-        if(loginResult){ // 로그인 성공
-            String logInToken = JwtUtil.createJwt(memberDto.getMemberEmail(),secretKey, expiredMs);
+        MemberDto loginResult = memberService.login(memberDto);
+        if(loginResult != null){ // 로그인 성공
+            String logInToken = JwtUtil.createJwt(loginResult.getNickName(),secretKey, expiredMs);
             Cookie cookie = JwtUtil.createCookie(logInToken, expiredMs);
             httpServletResponse.addCookie(cookie); // 쿠키 추가
             return "ok";
@@ -60,12 +60,21 @@ public class MemberController {
             return "fail";
         }
     }
-
     @GetMapping("/policy")
     public String policy(){
         return "memberViews/policy";
     }
-    @GetMapping("/main")                                            
+
+    @GetMapping("/logout")
+    public ResponseEntity<?> logout(){
+        HttpHeaders headers = JwtUtil.logOutJwt();;
+        return ResponseEntity.ok().headers(headers).build();
+    }
+    @GetMapping("/myprofile")
+    public String myprofile(){
+        return "memberViews/myProfile";
+    }
+    @GetMapping("/main")
     public String mainVeiw(Model model, @CookieValue(name = "auth_token",
             //true면 쿠키가 필수적으로 와야함 없으면 400오류 뱉음
             required = false) String token){
@@ -73,19 +82,13 @@ public class MemberController {
             return "memberViews/index";
         }
         try{
-            String userEmail = JwtUtil.parsingJwt(token, secretKey);
-            model.addAttribute("userEmail", userEmail);
+            String nickName = JwtUtil.parsingJwt(token, secretKey);
+            model.addAttribute("nickName", nickName);
         }catch (Exception e){
             return "memberViews/index";
         }
         return "memberViews/index";
     }
-    @GetMapping("/logout")
-    public ResponseEntity<?> logout(){
-        HttpHeaders headers = JwtUtil.logOutJwt();;
-        return ResponseEntity.ok().headers(headers).build();
-    }
-
     @GetMapping("/delete")
     public String delete(@RequestParam("id") Long id){
         memberService.delete(id);

@@ -5,7 +5,10 @@ import com.codingrecipe.member.dto.PageDto;
 import com.codingrecipe.member.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/blog")
@@ -13,12 +16,13 @@ import org.springframework.web.bind.annotation.*;
 public class BlogController {
     private final BoardService boardService;
     @GetMapping("/")
-    public String mainBoardView(){
+    public String mainBoardView(Model model){
+        List<BoardDto> boardDtos = boardService.blogList();
+        model.addAttribute("boardList", boardDtos);
         return "boardViews/blog";
     }
     @GetMapping("/projects")
     public String projectBoard(){
-
         return "boardViews/project";
     }
 

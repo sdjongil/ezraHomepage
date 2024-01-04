@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
 <!--  Last Published: Fri Dec 29 2023 08:27:37 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="658e8234ef485db1d618dac1" data-wf-site="658e8233ef485db1d618da5a">
@@ -56,7 +57,7 @@
                 </div>
             </div>
         </div>
-        <div class="space-120 projects-space">
+        <div class="space-120 projects-space" style="display: flex">
             <div>
                 <h4>Title</h4>
             </div>
@@ -69,6 +70,9 @@
             <div>
                 <h4>hits</h4>
             </div>
+            <div>
+                <h4>views</h4>
+            </div>
         </div>
         <div class="w-dyn-list">
             <div role="list" class="list-projects-b w-dyn-items">
@@ -77,34 +81,21 @@
                         <div class="divider-project-b"></div>
                         <table class="blog-board-table">
                             <tbody>
-                                <tr>
-                                    <td>게시글 제목 1</td>
-                                    <td>홍길동</td>
-                                    <td>24.01.02</td>
-                                    <td>15</td>
-                                </tr>
-                                <tr>
-                                    <td>게시글 제목 1</td>
-                                    <td>홍길동</td>
-                                    <td>24.01.02</td>
-                                    <td>15</td>
-                                </tr>
-                                <tr>
-                                    <td>게시글 제목 1</td>
-                                    <td>홍길동</td>
-                                    <td>24.01.02</td>
-                                    <td>15</td>
-                                </tr>
-                                <tr>
-                                    <td>게시글 제목 1</td>
-                                    <td>홍길동</td>
-                                    <td>24.01.02</td>
-                                    <td>15</td>
-                                </tr>
+                                <c:forEach items="${boardList}" var="board" varStatus="status">
+
+                                    <tr id="userBoard" style="background-color:${status.index % 2 == 0 ? "#000000;" : "#101005;"}; display: flex;
+                                            margin-top: 5px; padding: 5px">
+                                        <td><a style="text-decoration: none;" href="/board?id=${board.id}">${board.boardTitle}</a></td>
+                                        <td>${board.boardWriter}</td>
+                                        <td>
+                                            <fmt:formatDate value="${board.boardCreatedTime}" pattern="yy-MM-dd" />
+                                        </td>
+                                        <td>${board.boardHits}</td>
+                                        <td>${board.views}</td>
+                                    </tr>
+                                </c:forEach>
                             </tbody>
                         </table>
-
-
                     </div>
                 </div>
             </div>
@@ -114,6 +105,21 @@
 
 <div id="footer-container"></div>
 </body>
+<style>
+    .projects-space > div:first-child{
+        flex: 5;
+    }
+    .projects-space > div{
+        flex: 1;
+    }
+    #userBoard > td:first-child{
+        text-align: center;
+        flex: 5;
+    }
+    #userBoard > td{
+        flex: 1;
+    }
+</style>
 <script src="${pageContext.request.contextPath}/resources/static/js/baseForm.js"></script>
 <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=658e8233ef485db1d618da5a"
         type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>

@@ -38,7 +38,7 @@
                         <div class="undeline-inside"></div>
                     </div>
                 </a>
-                <a href="#" class="big-underline-link w-inline-block">
+                <a href="/member/myprofile" class="big-underline-link w-inline-block">
                     <div>My Profile</div>
                     <div class="underline-master">
                         <div class="undeline-inside"></div>

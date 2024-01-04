@@ -20,12 +20,12 @@ public class HomeController {
     public String index(Model model, @CookieValue(name = "auth_token",
     required = false) String logInToken) {
         if(logInToken == null || logInToken.isEmpty()){
-            model.addAttribute("userEmail", "Mx.anonymous");
+            model.addAttribute("nickName", "Mx.anonymous");
             return "main";
         }
         try{
-            String userEmail = JwtUtil.parsingJwt(logInToken, secretKey);
-            model.addAttribute("userEmail", userEmail);
+            String nickName = JwtUtil.parsingJwt(logInToken, secretKey);
+            model.addAttribute("nickName", nickName);
         }catch (Exception e){
             log.error("Error parsing JWT token: " + e.getMessage());
             return "main";

@@ -9,7 +9,7 @@
     <title>Home | Ezra portflio</title>
     <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=658e8233ef485db1d618da5a"
             type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-    <link href=".${pageContext.request.contextPath}/resources/static/css/normalize.css" rel="stylesheet" type="text/css">
+    <link href="${pageContext.request.contextPath}/resources/static/css/normalize.css" rel="stylesheet" type="text/css">
     <link href="${pageContext.request.contextPath}/resources/static/css/webflow.css" rel="stylesheet" type="text/css">
     <link href="${pageContext.request.contextPath}/resources/static/css/hans-wondrous-site-b14015.webflow.css" rel="stylesheet" type="text/css">
     <link href="${pageContext.request.contextPath}/resources/static/css/nav.css" rel="stylesheet" type="text/css">
@@ -25,11 +25,11 @@
     <div class="main-container w-container">
         <h1 style="font-size: 66px;margin-bottom: 20px" id="userId" data-w-id="1b624307-1d06-ef67-6ffe-f2316f1d6c09" class="mega-h1 hero-a-one">
             <c:choose>
-                <c:when test="${not empty userEmail}">
-                    ${userEmail}
+                <c:when test="${not empty nickName}">
+                    ${nickName}
                 </c:when>
                 <c:otherwise>
-                    Mx Anonymous
+                    Mx Anonymouss
                 </c:otherwise>
             </c:choose></h1>
         <div class="heading-wrap-home-a">

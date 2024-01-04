@@ -26,4 +26,8 @@ public class BoardRepository implements IF_BoardRepository{
     public int totalPage() {
         return sql.selectOne("Board.totalPage");
     }
+
+    public List<BoardDto> boardList() {
+        return sql.selectList("Board.findAll");
+    }
 }

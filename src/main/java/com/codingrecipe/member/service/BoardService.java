@@ -24,4 +24,8 @@ public class BoardService implements IF_BoardService {
     public int totalPage() {
         return boardRepository.totalPage();
     }
+
+    public List<BoardDto> blogList() {
+        return boardRepository.boardList();
+    }
 }

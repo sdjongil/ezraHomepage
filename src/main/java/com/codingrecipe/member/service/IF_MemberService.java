@@ -12,7 +12,7 @@ public interface IF_MemberService {
 
     //서비스 구현은 별도의 클래스에서 구현 받아 메서드를 재정의한다.
     public int save(MemberDto memberDto); // 컨트롤러에게 제공하는 서비스 정의
-    public boolean login(MemberDto memberDto);
+    public MemberDto login(MemberDto memberDto);
     public List<MemberDto> findAll();
     public MemberDto findById(Long id);
     public void delete(Long id);
