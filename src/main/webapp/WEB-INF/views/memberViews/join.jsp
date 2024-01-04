@@ -43,6 +43,8 @@
                                name="memberName" placeholder="Name" autocomplete="off">
                         <input id="memberEmail" type="email" class="input-underline w-input" maxlength="30"
                                name="memberEmail" placeholder="Email" autocomplete="off"  onblur="emailCheck()">
+                        <input type="text" class="input-underline w-input" maxlength="18"
+                               name="NickName" placeholder="NickName" autocomplete="off">
                         <input type="password" class="input-underline w-input" maxlength="30"
                                name="memberPassword" placeholder="Password">
                         <input type="password" class="input-underline w-input" maxlength="30"
@@ -57,7 +59,8 @@
                             </label>
 
                         </div>
-                        <input type="submit" value="Submit" data-wait="Please wait..." class="cta big-submit w-button">
+                        <input type="submit" value="Submit" data-wait="Please wait..."
+                               class="cta big-submit w-button">
                     </form>
                 </div>
             </div>
