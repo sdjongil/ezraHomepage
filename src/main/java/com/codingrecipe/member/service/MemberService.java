@@ -58,4 +58,12 @@ public class MemberService implements IF_MemberService {
             return "no";
         }
     }
+    public String nickCheck(String nickname) {
+        MemberDto memberDto = memberRepository.findByNickname(nickname);
+        if(memberDto == null){
+            return "ok";
+        }else{
+            return "no";
+        }
+    }
 }

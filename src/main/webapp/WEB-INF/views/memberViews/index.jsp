@@ -23,7 +23,7 @@
     <div class="main-container w-container">
         <div class="heading-wrap-contact">
             <div class="left-contact-heading">
-                <h1 class="heading-contact">Already a member? Log in here.</h1>
+                <h1 id="welcome" class="heading-contact">Already a member? Log in here.</h1>
             </div>
             <div class="right-contact-heading">
                 <a href="/member/join" class="big-underline-link w-inline-block">
@@ -108,6 +108,15 @@
             }
         });
     });
+    window.onload = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const welcome = document.getElementById("welcome")
+        if(urlParams.get('signup') !== null) {
+            welcome.innerText = urlParams.get('signup');
+            alert('회원가입이 완료되었습니다. 로그인해주세요.');
+
+        }
+    };
 
 
 </script>

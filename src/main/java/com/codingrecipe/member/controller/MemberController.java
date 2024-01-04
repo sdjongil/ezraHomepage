@@ -40,14 +40,10 @@ public class MemberController {
     public String save(@ModelAttribute MemberDto memberDto){
         int saveResult = memberService.save(memberDto);
         if(saveResult > 0){ //회원가입 성공
-            return "/";
+            return "redirect:/member/?signup=Congratulations on signing up";
         }else{  // 회원가입 실패
-            return "/";
+            return "redirect:/member/?signup=please try again";
         }
-    }
-    @GetMapping("/login")
-    public String LoginForm(){
-        return "memberViews/login";
     }
     @PostMapping("/login")
     @ResponseBody
@@ -127,6 +123,14 @@ public class MemberController {
     //url의 member/email-check?memberEmail={값}일 때 memberEmail 값을 가져옴
     public String emailCheck(@RequestParam("memberEmail") String memberEmail){
         String checkresult = memberService.emailCheck(memberEmail);
+        return checkresult;
+    }
+    @PostMapping("/nick-check")
+    //ajax요청 처리할 땐 리스폰스바디, 리스폰스엔티티로 처리해주어야한다.
+    @ResponseBody
+    //url의 member/email-check?memberEmail={값}일 때 memberEmail 값을 가져옴
+    public String nickCheck(@RequestParam("nickName") String nickName){
+        String checkresult = memberService.nickCheck(nickName);
         return checkresult;
     }
 }

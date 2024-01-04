@@ -36,21 +36,27 @@
             <div class="column-contact-form w-col w-col-6">
                 <div class="w-form">
                     <div >
-                        <div id="check-result" style="text-align: center;"> </div>
+                        <div id="email-check-result" class="checks" style="text-align: center;"> </div>
+                        <div id="phone-check-result" class="checks" style="text-align: center;"> </div>
+                        <div id="pass-check-result" class="checks" style="text-align: center;"> </div>
+                        <div id="nick-check-result" class="checks" style="text-align: center;"> </div>
+                        <div id="name-check-result" class="checks" style="text-align: center;"> </div>
                     </div>
-                    <form id="join" action="/member/save" method="post" >
-                        <input type="text" class="input-underline w-input" maxlength="18"
-                               name="memberName" placeholder="Name" autocomplete="off">
+                    <form id="join" action="/member/join" method="post"  onsubmit="return validateForm()">
+                        <input id="memberName" type="text" class="input-underline w-input" maxlength="20"
+                               name="memberName" placeholder="Name" autocomplete="off" onblur="nameCheck()">
                         <input id="memberEmail" type="email" class="input-underline w-input" maxlength="30"
                                name="memberEmail" placeholder="Email" autocomplete="off"  onblur="emailCheck()">
-                        <input type="text" class="input-underline w-input" maxlength="18"
-                               name="NickName" placeholder="NickName" autocomplete="off">
-                        <input type="password" class="input-underline w-input" maxlength="30"
+                        <input id="memberNickName" type="text" class="input-underline w-input" maxlength="20"
+                               name="NickName" placeholder="NickName" autocomplete="off" onblur="nickCheck()">
+                        <h5>Your nickname must be a English letters of 4 to 20.</h5>
+                        <input id="password" type="password" class="input-underline w-input" maxlength="25"
                                name="memberPassword" placeholder="Password">
-                        <input type="password" class="input-underline w-input" maxlength="30"
-                               placeholder="Confirm  Password">
-                        <input type="text" class="input-underline w-input" maxlength="30"
-                               name="memberMobile" placeholder="Mobile" autocomplete="off">
+                        <h5>Your password must be a combination of 8 to 25 English letters and numbers.</h5>
+                        <input id="passwordCon" type="password" class="input-underline w-input" maxlength="25"
+                               placeholder="Confirm  Password" onblur="checkPass()">
+<%--                        <input id="phoneNumber" type="text" class="input-underline w-input" maxlength="13"--%>
+<%--                               name="memberMobile" placeholder="Mobile (010-1234-1234)" autocomplete="off" onblur="phoneCheck()">--%>
                         <div class="agreement">
                             <label for="agree">"I have read and agree to
                                 <a href="/member/policy">the Terms and Conditions</a>
@@ -75,6 +81,9 @@
         margin-left: 5px;
         transform: scale(1.8);
     }
+    .checks{
+        color: red;
+    }
 
 </style>
 <script src="${pageContext.request.contextPath}/resources/static/js/baseForm.js"></script>
@@ -82,9 +91,52 @@
         type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath}/resources/static/js/webflow.js" type="text/javascript"></script>
 <script>
+    let isOkName = false
+    let isOkEmail = false
+    let isOkPass = false
+    let isOkNick = false
+    const expName = /^[A-Za-z]{4,20}$/;
+    const nameCheck = () => {
+        const name = document.getElementById("memberName").value;
+        const checkNameResult = document.getElementById("name-check-result");
+        if(!expName.test(name)){
+            checkNameResult.innerText = "Your name must be a English letters of 4 to 20."
+            isOkName = false;
+        }else {
+            checkNameResult.innerText = ""
+            isOkName = true;
+        }
+    }
+    const nickCheck = () => {
+        const nick = document.getElementById("memberNickName").value;
+        const checkNameResult = document.getElementById("nick-check-result");
+        if(!expName.test(nick)){
+            checkNameResult.innerText = "Your nickname must be a English letters of 4 to 20."
+            isOkNick = false;
+        }else {
+            $.ajax({
+                type:"post",
+                url: "/member/nick-check",
+                data:{
+                    "nickName" : nick
+                },
+                success: function (res){
+                    if (res=="ok"){
+                        checkNameResult.innerText = ""
+                        isOkNick = true;
+                    }else{
+                        checkNameResult.innerHTML = "This nickname already exists.";
+                        isOkNick = false;
+                    }
+                },error(error){
+                    console.log("에러발생", err);
+                }
+            });
+        }
+    }
     const emailCheck = () => {
         const email = document.getElementById("memberEmail").value;
-        const checkResult = document.getElementById("check-result");
+        const checkResult = document.getElementById("email-check-result");
         $.ajax({
             type: "post",
             url: "/member/email-check",
@@ -93,11 +145,11 @@
             },
             success: function(res) {
                 if (res == "ok") {
-                    checkResult.style.color = "green";
-                    checkResult.innerHTML = "This email can be used";
+                    checkResult.innerHTML = "";
+                    isOkEmail = true;
                 } else {
-                    checkResult.style.color = "red";
                     checkResult.innerHTML = "This username already exists.";
+                    isOkEmail = false;
                 }
             },
             error: function(err) {
@@ -105,6 +157,47 @@
             }
         });
     }
+    const checkPass = () =>{
+        const pass = document.getElementById("password").value;
+        const passCon = document.getElementById("passwordCon").value;
+        const passCheck = document.getElementById("pass-check-result");
+        const expPass = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/;
+        if(pass !== passCon){
+            passCheck.innerHTML = "The passwords don't match.";
+            isOkPass = false;
+        }else {
+            if(!expPass.test(pass)){
+                passCheck.innerHTML = "Your password must be a combination of 8 to 25 English letters and numbers.";
+                isOkPass = false;
+            }else{
+                isOkPass = true;
+                passCheck.innerHTML = "";
+            }
+        }
+    }
+    function validateForm() {
+        if (isOkNick && isOkName && isOkPass && isOkEmail) {
+            return true;
+        } else {
+            alert("Please check your form again");
+            return false;
+        }
+    }
+
+
+
+    // const phoneCheck =()=>{
+    //     const expHpText = /^\d{3}-\d{3,4}-\d{4}$/;
+    //     const phoneNum = document.getElementById("phoneNumber").value;
+    //     const checkResult = document.getElementById("phone-check-result");
+    //     if(!expHpText.test(phoneNum)){
+    //         checkResult.style.color = "red";
+    //         checkResult.innerHTML = "The phone number is not formatted correctly.";
+    //     }else{
+    //         checkResult.innerHTML = "";
+    //     }
+    //
+    // }
 </script>
 
 </html>

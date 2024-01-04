@@ -47,6 +47,9 @@ public class MemberRepository implements IF_MemberRepository {
     public MemberDto findByMemberEmail(String loginEmail) {
         return sql.selectOne("Member.findByMemberEmail", loginEmail);
     }
+    public MemberDto findByNickname(String nickname) {
+        return sql.selectOne("Member.findByNickName", nickname);
+    }
     @Override
     public int update(MemberDto memberDto) {
         return sql.update("Member.update", memberDto);

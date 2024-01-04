@@ -4,8 +4,8 @@
 
 <mapper namespace="Member">
     <insert id="save" parameterType="member">
-        insert into member_table(id, memberEmail, memberPassword, memberName, memberAge, memberMobile)
-        values (seq_member.NEXTVAL, #{memberEmail}, #{memberPassword}, #{memberName}, #{memberAge}, #{memberMobile})
+        insert into member_table(id, memberEmail, memberPassword, memberName, nickName)
+        values (seq_member.NEXTVAL, #{memberEmail}, #{memberPassword}, #{memberName}, #{nickName})
     </insert>
     <select id="login" parameterType="member" resultType="member">
         select * from member_table where memberEmail=#{memberEmail} and memberPassword=#{memberPassword}
@@ -21,6 +21,9 @@
     </delete>
     <select id="findByMemberEmail" parameterType="String" resultType="member">
         select * from member_table where memberEmail=#{loginEmail}
+    </select>
+    <select id="findByNickName" parameterType="String" resultType="member">
+        select * from member_table where nickName=#{nickName}
     </select>
     <update id="update" parameterType="member">
         update member_table set memberAge=#{memberAge}, memberMobile=#{memberMobile}
