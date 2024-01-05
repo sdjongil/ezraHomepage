@@ -28,4 +28,12 @@ public class BoardService implements IF_BoardService {
     public List<BoardDto> blogList() {
         return boardRepository.boardList();
     }
+
+    public boolean postBlog(BoardDto boardDto) {
+        if(boardRepository.postBlog(boardDto)>0){
+            return true;
+        }else {
+            return false;
+        }
+    }
 }

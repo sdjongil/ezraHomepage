@@ -104,15 +104,7 @@ public class MemberController {
         model.addAttribute("member", memberDto);
         return "memberViews/update";
     }
-//    @PostMapping("/update")
-//    public String update(@ModelAttribute MemberDto memberDto){
-//        boolean result = memberService.update(memberDto);
-//        if(result){
-//            return "redirect:/member?id="+memberDto.getId();
-//        }else{
-//            return "memberViews/index";
-//        }
-//    }
+
     @PostMapping("/update")
     public String update(@RequestParam("userId") String userId){
         System.out.println(userId);

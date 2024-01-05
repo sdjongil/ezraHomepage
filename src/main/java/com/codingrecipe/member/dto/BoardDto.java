@@ -12,10 +12,11 @@ import java.sql.Timestamp;
 public class BoardDto {
     private Long id;
     private String boardWriter;
-    private String boardPass;
     private String boardTitle;
     private String boardContents;
     private int boardHits;
     private Timestamp boardCreatedTime;
     private int views;
+    private String category;
+    private char isFile;
 }

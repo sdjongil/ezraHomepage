@@ -182,6 +182,7 @@
     </dependency>
 
 
+
     <!-- https://mvnrepository.com/artifact/com.oracle.ojdbc/orai18n
      ojdbc8.jar에서 사용하는 인코딩 방식이 jdbc에서 사용하는 방식이 아니기 때문에 충돌-->
 

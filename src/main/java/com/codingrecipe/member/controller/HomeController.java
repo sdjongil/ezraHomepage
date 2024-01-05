@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 public class HomeController {
     @Value("${jwt.secret}")
     private String secretKey;
-    private static final Logger log = LoggerFactory.getLogger(HomeController.class);
+    static final Logger log = LoggerFactory.getLogger(HomeController.class);
 
     @GetMapping("/")
     public String index(Model model, @CookieValue(name = "auth_token",

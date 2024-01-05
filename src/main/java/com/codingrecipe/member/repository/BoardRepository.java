@@ -30,4 +30,8 @@ public class BoardRepository implements IF_BoardRepository{
     public List<BoardDto> boardList() {
         return sql.selectList("Board.findAll");
     }
+
+    public int postBlog(BoardDto boardDto) {
+        return sql.insert("Board.postBlog", boardDto);
+    }
 }
