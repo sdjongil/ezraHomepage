@@ -10,10 +10,9 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ProductService implements IF_ProductService{
+public class ProductService{
     private final ProductRepository productRepository;
 
-    @Override
     public List<ProductsDto> findAll() {
         List<ProductsDto> productsDtoList = productRepository.findAll();
         return productsDtoList;

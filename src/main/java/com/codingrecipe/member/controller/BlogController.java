@@ -24,9 +24,11 @@ public class BlogController {
     private final BoardService boardService;
     @Value("${jwt.secret}")
     private String secretKey;
+
     @GetMapping("/")
-    public String mainBoardView(Model model){
-        List<BoardDto> boardDtos = boardService.blogList();
+    public String boardView(Model model, @ModelAttribute PageDto pageDto){
+        System.out.println(pageDto.toString());
+        List<BoardDto> boardDtos = boardService.blogList(pageDto);
         model.addAttribute("boardList", boardDtos);
         return "boardViews/blog";
     }
@@ -42,10 +44,11 @@ public class BlogController {
 
     @GetMapping("/writeBlog")
     public String writeBlog(Model model, @CookieValue(name = "auth_token",
-            required = false) String logInToken){
+            required = false) String logInToken, PageDto pageDto){
         if(logInToken == null || logInToken.isEmpty()){
             model.addAttribute("nickName", "anonymous");
-            List<BoardDto> boardDtos = boardService.blogList();
+            //---------------------------수정----------------------
+            List<BoardDto> boardDtos = boardService.blogList(pageDto);
             model.addAttribute("boardList", boardDtos);
             return "boardViews/blog";
         }
@@ -56,7 +59,7 @@ public class BlogController {
         }catch (Exception e){
             log.error("Error parsing JWT token: " + e.getMessage());
             model.addAttribute("nickName", "anonymous");
-            List<BoardDto> boardDtos = boardService.blogList();
+            List<BoardDto> boardDtos = boardService.blogList(pageDto);
             model.addAttribute("boardList", boardDtos);
             return "boardViews/blog";
         }
@@ -70,21 +73,10 @@ public class BlogController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"status\": \"failure\", \"redirect\": \"/blog/writeBlog\"}");
         }
     }
-    @PostMapping("/save")
-    //ModelAttribute = html의 태그 속성 "name"과 Dto의 필드 변수명이 같아야 한다!
-    //setter를 통해서 호출
-    public String save(@ModelAttribute BoardDto boardDto){
-        int saveResult = boardService.save(boardDto);
-        if (saveResult > 0){
-            return "redirect:/board/";
-        }else{
-            return "boardViews/save";
-        }
-    }
-    @PostMapping("/list")
-    public String nowPage(@RequestBody PageDto pageDto){
-        pageDto.prt();
-        return "boardViews/list";
+    @GetMapping("/blogTotal")
+    @ResponseBody
+    public int blogTotal(){
+        return boardService.totalPage();
     }
 
 

@@ -15,14 +15,18 @@
 </div>
 </body>
 <script>
-    let boardNoCookie = document.cookie;
-    let boardNo = '1';
+    let boardNo;
+    if(sessionStorage.getItem('boardNo')===null){
+        boardNo = '1';
+    }else{
+        boardNo = sessionStorage.getItem('boardNo');
+    }
     let pageDto = {
         startPage: null,
         endPage: null,
         perPageNum: 10,
         page: null,
-        totalCount: 36,
+        totalCount: 41,
         startNo: null,
         endNo: null,
         prev: null,
@@ -30,15 +34,6 @@
         searchType: null,
         searchKeyword: null
     };
-    if(boardNoCookie === ''){
-        let now = new Date();
-        now.setTime(now.getTime() + (60 * 60 * 1000)); // 현재 시간에 1시간(60분 * 60초 * 1000밀리초)을 더함
-        let expires = now.toUTCString(); // UTC 시간 문자열로 변환
-        document.cookie = "boardNo=" + boardNo + "; path=/board; expires=" + expires;
-    }else {
-        let cookie = boardNoCookie.split("=")
-        boardNo = cookie[1];
-    }
     settingPage(boardNo)
 
     function settingPage(boardNo){
@@ -66,21 +61,6 @@
     console.log("startPage: " + pageDto.startPage);
     console.log("endPage: " + pageDto.endPage);
 
-    sessionStorage.setItem('pageDto', JSON.stringify(pageDto));
-
-    // sessionStorage에서 데이터 불러오기
-    let savedPageDto = sessionStorage.getItem('pageDto');
-
-    // 문자열을 JavaScript 객체로 변환
-    if (savedPageDto) {
-        savedPageDto = JSON.parse(savedPageDto);
-    } else {
-        // 저장된 데이터가 없는 경우의 처리
-        console.log('No data found in sessionStorage');
-    }
-
-    // 사용 예
-    console.log(savedPageDto);
 
 
     document.getElementById("boardListLink").addEventListener("click", function(e) {

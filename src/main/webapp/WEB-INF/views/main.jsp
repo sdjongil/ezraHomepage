@@ -110,6 +110,21 @@
 </div>
 <div id="footer-container"></div>
 </body>
+<script>
+    function getTotal(){
+        fetch('/blog/blogTotal').then(response =>{
+            if(!response.ok){
+                throw new Error('Network response error')
+            }
+            return response.text()
+        }).then(count =>{
+            sessionStorage.setItem("total", count)
+        }).catch(error=>{
+            console.log("Fetch error : " + error);
+        })
+    }
+    getTotal()
+</script>
 <script src="${pageContext.request.contextPath}/resources/static/js/baseForm.js"></script>
 <script src="${pageContext.request.contextPath}/resources/static/js/webflow.js" type="text/javascript"></script>
 </html>

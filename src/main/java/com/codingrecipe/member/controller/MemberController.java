@@ -89,29 +89,7 @@ public class MemberController {
         }
         return "memberViews/index";
     }
-    @GetMapping("/delete")
-    public String delete(@RequestParam("id") Long id){
-        memberService.delete(id);
-        //재요청 (새로고침(클라이언트에서 새로고침)과 비슷한 개념 => 리디렉트(서버에서의 새로고침))
-        // /member주소를 갖은 뷰컨트롤러를 다시 실행시킨다. 컨트롤러의 로직이 다시 실행
-        return "redirect:member/";
-    }
 
-    @GetMapping("/update")
-    public String updateForm(HttpSession session, Model model){
-        String loginEmail = (String) session.getAttribute("loginEmail");
-        MemberDto memberDto = memberService.findByMemberEmail(loginEmail);
-        model.addAttribute("member", memberDto);
-        return "memberViews/update";
-    }
-
-    @PostMapping("/update")
-    public String update(@RequestParam("userId") String userId){
-        System.out.println(userId);
-        return "";
-    }
-    //ModelAttribute = 객체, 주로 폼 데이터를 객체에 매핑할 때, ex> 프론트 form에서의 값들이 dto에 자동 매핑
-    //RequestParam = 단일 요청, url 특정 쿼리 파라미터 추출, 폼 데이터 중 특정 필드
     @PostMapping("/email-check")
     //ajax요청 처리할 땐 리스폰스바디, 리스폰스엔티티로 처리해주어야한다.
     @ResponseBody

@@ -183,21 +183,6 @@
             return false;
         }
     }
-
-
-
-    // const phoneCheck =()=>{
-    //     const expHpText = /^\d{3}-\d{3,4}-\d{4}$/;
-    //     const phoneNum = document.getElementById("phoneNumber").value;
-    //     const checkResult = document.getElementById("phone-check-result");
-    //     if(!expHpText.test(phoneNum)){
-    //         checkResult.style.color = "red";
-    //         checkResult.innerHTML = "The phone number is not formatted correctly.";
-    //     }else{
-    //         checkResult.innerHTML = "";
-    //     }
-    //
-    // }
 </script>
 
 </html>

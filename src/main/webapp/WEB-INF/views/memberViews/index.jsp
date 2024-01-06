@@ -77,6 +77,7 @@
         fetch('/member/logout', { method: 'GET' })
             .then(response => {
                 if (response.ok) {
+                    sessionStorage.setItem('boardNo', '1');
                     window.location.href = '/';
                 } else {
                     console.error('Logout failed');
@@ -84,6 +85,7 @@
             })
             .catch(error => console.error('Error:', error));
     });
+
 
     $('#login-form').submit(function(event) {
         event.preventDefault();
@@ -95,6 +97,7 @@
             data: formData,
             success: function(response) {
                 if(response=="ok"){
+                    sessionStorage.setItem('boardNo', '1');
                     window.location.href = '/';
                 }else{
                     checkResult.style.color="red"

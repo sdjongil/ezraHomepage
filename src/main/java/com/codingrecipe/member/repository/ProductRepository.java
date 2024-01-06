@@ -9,9 +9,8 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class ProductRepository implements IF_ProductRepository{
+public class ProductRepository{
     public final SqlSessionTemplate sql;
-    @Override
     public List<ProductsDto> findAll() {
         List<ProductsDto> productsDtoList = sql.selectList("Products.findAll");
         return sql.selectList("Products.findAll");
