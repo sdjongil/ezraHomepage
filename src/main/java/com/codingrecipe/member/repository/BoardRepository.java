@@ -27,4 +27,8 @@ public class BoardRepository{
     public int postBlog(BoardDto boardDto) {
         return sql.insert("Board.postBlog", boardDto);
     }
+
+    public BoardDto blogDetail(Integer id) {
+        return sql.selectOne("Board.blogDetail",id);
+    }
 }

@@ -47,10 +47,7 @@ public class BlogController {
             required = false) String logInToken, PageDto pageDto){
         if(logInToken == null || logInToken.isEmpty()){
             model.addAttribute("nickName", "anonymous");
-            //---------------------------수정----------------------
-            List<BoardDto> boardDtos = boardService.blogList(pageDto);
-            model.addAttribute("boardList", boardDtos);
-            return "boardViews/blog";
+            return "memberViews/index";
         }
         try{
             String nickName = JwtUtil.parsingJwt(logInToken, secretKey);
@@ -77,6 +74,12 @@ public class BlogController {
     @ResponseBody
     public int blogTotal(){
         return boardService.totalPage();
+    }
+    @GetMapping("/detail")
+    public String blogDetail(@RequestParam Integer id, Model model, BoardDto boardDto){
+        boardDto = boardService.blogDetail(id);
+        model.addAttribute("board",boardDto);
+        return "boardViews/blogDetail";
     }
 
 

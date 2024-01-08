@@ -23,7 +23,7 @@
 <div id="top" class="section projects-a">
     <div class="main-container w-container">
         <h1 data-w-id="16cfbc97-3818-6f4c-23d0-e154a4034af6" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0">
-            My Study blog</h1>
+            You can post it if you are sign in</h1>
         <div class="right-contact-heading">
             <a href="/blog/projects" class="big-underline-link w-inline-block">
                 <div>Projects</div>
@@ -90,7 +90,7 @@
                                     <tr class="userBoard" style="background-color:${status.index % 2 == 0 ? "#000000;" : "#101005;"}; display: flex;
                                             margin-top: 5px; padding: 5px">
                                         <td>${board.category}</td>
-                                        <td id="userTitle"><a style="text-decoration: none;" href="/board?id=${board.id}">${board.boardTitle}</a></td>
+                                        <td id="userTitle"><a style="text-decoration: none;" href="/blog/detail?id=${board.id}">${board.boardTitle}</a></td>
                                         <td>${board.boardWriter}</td>
                                         <td>
                                             <fmt:formatDate value="${board.boardCreatedTime}" pattern="yy-MM-dd" />
@@ -150,53 +150,32 @@
 <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=658e8233ef485db1d618da5a"
         type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath}/resources/static/js/webflow.js" type="text/javascript"></script>
-<script>
-    let boardNo;
-    if(sessionStorage.getItem('boardNo')===null){
-        boardNo = '1';
+<script type="module">
+    import { PageDto } from "../../../resources/static/js/PageDto.js";
+
+    let pageDto;
+    if(sessionStorage.getItem('pageDto')===null){
+        fetch('/blog/blogTotal').then(response =>{
+            if(!response.ok){
+                throw new Error('Network response error')
+            }
+            return response.text()
+        }).then(count =>{
+            pageDto = new PageDto(count)
+            pageDto.calculatePageDto()
+            createPagination(pageDto);
+        }).catch(error=>{
+            console.log("Fetch error : " + error);
+        })
     }else{
-        boardNo = sessionStorage.getItem('boardNo');
-    }
-    let pageDto = {
-        startPage: null, //현재페이지 기준 게시판 시작 페이지
-        endPage: null,  //현재페이지 기준 게시판 끝 페이지
-        perPageNum: 5, //한페이지당 게시물 수
-        maxPage : 5,
-        page: boardNo,  // 현재 페이지
-        totalCount: sessionStorage.getItem("total"),  //총 게시물수
-        totalPage: null, //총 게시판 마지막 페이지
-        startNo: null,  //현재 목록에서 시작 게시물 id
-        endNo: null,  //현재 목록에서 끝 게시물 id
-        prev: null, //다음 페이지
-        next: null, //이전 페이지
-        searchType: "category", //서치 칼럼
-        orderBy: "boardcreatedtime", //정렬기준
-        order: "desc", //정렬순서 (오름,내림)
-        searchKeyword: "%" //서치 내용
-    };
-
-    calculatePageDto(pageDto);
-
-    function calculatePageDto(pageDto) {
-        // 전체 페이지 수 계산
-        pageDto.totalPage = Math.ceil(pageDto.totalCount / pageDto.perPageNum);
-        // 현재 페이지 주변의 페이지 범위 계산
-        let halfWindow = Math.floor(pageDto.maxPage / 2);
-        pageDto.startPage = Math.max(1, pageDto.page - halfWindow);
-        pageDto.endPage = Math.min(pageDto.startPage + pageDto.maxPage - 1, pageDto.totalPage);
-        // 시작 페이지 조정
-        if (pageDto.endPage - pageDto.startPage < pageDto.maxPage - 1) {
-            pageDto.startPage = Math.max(1, pageDto.endPage - pageDto.maxPage + 1);
-        }
-        // 현재 목록에서 게시물 ID 범위 계산
-        pageDto.startNo = (pageDto.page - 1) * pageDto.perPageNum + 1;
-        pageDto.endNo = Math.min(pageDto.startNo + pageDto.perPageNum - 1, pageDto.totalCount);
-        // 이전/다음 페이지 존재 여부
-        pageDto.prev = pageDto.page > 1;
-        pageDto.next = pageDto.page < pageDto.totalPage;
+        let storedData = sessionStorage.getItem("pageDto");
+        let data = JSON.parse(storedData);
+        pageDto = new PageDto(data.totalCount);
+        Object.assign(pageDto, data); // 저장된 데이터를 pageDto 인스턴스에 복사
+        createPagination(pageDto);
     }
 
-    function createPagination() {
+    function createPagination(pageDto) {
         const paginationContainer = document.getElementById('pagination');
         addPageLink(paginationContainer, 1, true);
         for (let i = pageDto.startPage; i <= pageDto.endPage; i++) {
@@ -209,15 +188,15 @@
         const pageLink = document.createElement('a');
         pageLink.onclick=(event)=>{
             event.preventDefault();
-            sessionStorage.setItem("boardNo", pageNumber)
             pageDto.page = pageNumber
-            calculatePageDto(pageDto)
+            pageDto.calculatePageDto()
+            sessionStorage.setItem("pageDto", JSON.stringify(pageDto))
             const href = "/blog/?startNo="+pageDto.startNo+"&endNo="+pageDto.endNo+"&perPageNum="+pageDto.perPageNum+
                 "&searchType="+pageDto.searchType+"&searchKeyword="+pageDto.searchKeyword+"&orderBy="+
                 pageDto.orderBy+"&order="+pageDto.order;
             window.location.href = href;
         }
-        pageLink.href = "#"; // 또는 JavaScript:void(0);
+        pageLink.href = "#";
         pageLink.textContent = pageNumber;
 
         if(isFirst){
@@ -227,17 +206,7 @@
         }
         container.appendChild(pageLink);
     }
-    createPagination();
-    console.log(pageDto)
-
 
 </script>
-<script>
-    var nickName = "<%= request.getAttribute("nickName") %>";
 
-    // 'anonymous'일 경우 경고창 표시
-    if (nickName === 'anonymous') {
-        alert('로그인 해야 가능합니다.');
-    }
-</script>
 </html>

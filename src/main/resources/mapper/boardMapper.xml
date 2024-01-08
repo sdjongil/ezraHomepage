@@ -10,7 +10,9 @@
             WHERE ${searchType} Like #{searchKeyword})
             WHERE rn BETWEEN #{startNo} AND #{endNo}
     </select>
-
+    <select id="blogDetail" resultType="board" parameterType="Integer">
+        Select * from board_table where id = #{id}
+    </select>
     <select id="totalPage" resultType="Integer">
         select count (*) from board_table
     </select>

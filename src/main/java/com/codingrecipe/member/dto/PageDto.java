@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class PageDto {
     private Integer page = 1;
     private Integer startNo = 1;
-    private Integer endNo = 5;
+    private Integer endNo = 10;
     private Integer perPageNum = 5;
     private String searchType = "category";
     private String searchKeyword ="%";

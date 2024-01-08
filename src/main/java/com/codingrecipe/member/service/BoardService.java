@@ -29,4 +29,8 @@ public class BoardService{
             return false;
         }
     }
+
+    public BoardDto blogDetail(Integer id) {
+        return boardRepository.blogDetail(id);
+    }
 }

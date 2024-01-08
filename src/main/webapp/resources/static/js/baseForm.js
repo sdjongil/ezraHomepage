@@ -30,3 +30,4 @@ xhrFooter.onreadystatechange = function() {
     }
 };
 xhrFooter.send();
+

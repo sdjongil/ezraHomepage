@@ -71,6 +71,14 @@
 <div id="footer-container"></div>
 </body>
 <script>
+    var nickName = "<%= request.getAttribute("nickName") %>";
+
+    // 'anonymous'일 경우 경고창 표시
+    if (nickName === 'anonymous') {
+        alert('Please log in first');
+    }
+</script>
+<script>
     document.getElementById('logOutLink').addEventListener('click', function(event) {
         event.preventDefault(); // 기본 링크 동작 방지
         // AJAX 요청 생성 및 전송
