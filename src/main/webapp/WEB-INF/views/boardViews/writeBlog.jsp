@@ -86,58 +86,8 @@
 
 </body>
 <script>
-    document.getElementById("blogPost").addEventListener("submit", function (event){
-        event.preventDefault();
-
-        var formData = new FormData();
-        var fileInput = document.getElementById('file');
-        var hasFile = fileInput.files.length > 0;
-        var isFile;
-        if (hasFile) {
-            isFile = 'T';
-        }else{
-            isFile = 'F';
-        }
-        var title = document.getElementById('title').value;
-        var content = document.getElementById('content').value;
-        var nickName = document.getElementById('nickName').value;
-        var category = document.getElementById('selector').value;
-
-        formData.append('isFile', isFile);
-        formData.append('boardTitle', title);
-        formData.append('boardContents', content);
-        formData.append('boardWriter', nickName);
-        formData.append('category', category);
-
-        for (var pair of formData.entries()) {
-            console.log(pair[0]+ ', ' + pair[1]);
-        }
-        fetch('/blog/postBlog', {
-            method: 'POST',
-            body: formData
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw response;
-                }
-                return response.json();
-            }).then(data => {
-            alert("success");
-            // 성공 시 리디렉션
-            window.location.href = data.redirect;
-            }).catch(error => {
-            error.json().then(errorData => {
-                alert("please try again");
-                // 실패 시 리디렉션
-                window.location.href = errorData.redirect;
-            });
-        });
-
-    })
-
-
-
     let fileNames = [];
+    let filesList = [];
     document.getElementById('drop-area').addEventListener('drop', function(e) {
         e.preventDefault();
         e.stopPropagation();
@@ -151,6 +101,8 @@
                 continue;
             }
             fileNames.push(file.name);
+            filesList.push(file);
+            console.log("Add", fileNames, ":", filesList)
             //이미지 div태그
             let imgWrap = document.createElement("div");
             imgWrap.classList.add("userPictureWrap");
@@ -168,6 +120,8 @@
                 let index = fileNames.indexOf(file.name);
                 if (index > -1) {
                     fileNames.splice(index, 1);
+                    filesList.splice(index, 1);
+
                 }
             };
             //이미지 div에 이미지와 취소버튼 추가
@@ -188,6 +142,55 @@
         e.preventDefault();
         e.stopPropagation();
     });
+    document.getElementById("blogPost").addEventListener("submit", function (event){
+        event.preventDefault();
+
+        var formData = new FormData();
+
+        var title = document.getElementById('title').value;
+        var content = document.getElementById('content').value;
+        var nickName = document.getElementById('nickName').value;
+        var category = document.getElementById('selector').value;
+        if(filesList.length>0){
+            filesList.forEach((file) => {
+                formData.append('fileData', file);
+            });
+        }else{
+            formData.append('fileData', null);
+        }
+        formData.append('boardTitle', title);
+        formData.append('boardContents', content);
+        formData.append('boardWriter', nickName);
+        formData.append('category', category);
+        for (let [key, value] of formData.entries()) {
+            console.log(key, value);
+        }
+
+        fetch('/blog/postBlog', {
+            method: 'POST',
+            body: formData,
+        }).then(response => {
+                if (!response.ok) {
+                    throw response;
+                }
+                return response.json();
+            }).then(data => {
+            alert("success");
+            // 성공 시 리디렉션
+            // window.location.href = data.redirect;
+            }).catch(error => {
+            error.json().then(errorData => {
+                alert("please try again");
+                // 실패 시 리디렉션
+                // window.location.href = errorData.redirect;
+            });
+        });
+
+    })
+
+
+
+
 
 </script>
 <style>

@@ -20,6 +20,9 @@
         insert into board_table(id, boardWriter, boardTitle, boardContents, category, isFile)
         values (seq_board.NEXTVAL, #{boardWriter}, #{boardTitle}, #{boardContents},#{category},#{isFile})
     </insert>
+    <select id="findMaxId" resultType="Integer" >
+        SELECT MAX(TO_NUMBER(id)) FROM board_table
+    </select>
 </mapper>
 
 

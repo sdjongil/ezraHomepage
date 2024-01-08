@@ -1,6 +1,7 @@
 package com.codingrecipe.member.controller;
 
 import com.codingrecipe.member.dto.BoardDto;
+import com.codingrecipe.member.dto.FilesDto;
 import com.codingrecipe.member.dto.PageDto;
 import com.codingrecipe.member.service.BoardService;
 import com.codingrecipe.member.utils.JwtUtil;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -63,11 +65,27 @@ public class BlogController {
     }
     @PostMapping("/postBlog")
     @ResponseBody
-    public ResponseEntity<?> postBlog(@ModelAttribute BoardDto boardDto){
-        if(boardService.postBlog(boardDto)){
-            return ResponseEntity.ok().body("{\"status\": \"success\", \"redirect\": \"/blog/\"}");
+    public ResponseEntity<?> postBlog(@ModelAttribute BoardDto boardDto,
+                                      @RequestParam(name = "fileData", required = false) MultipartFile[] files,
+                                      FilesDto filesDto){
+        //게시물 저장과 동시에 id값 가져옴
+        if(files == null){
+            boardDto.setIsFile('F');
+            int result = boardService.postBlog(boardDto);
+            if((result>0)){
+                return ResponseEntity.ok().body("{\"status\": \"success\", \"redirect\": \"/blog/\"}");
+            }else{
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"status\": \"failure\", \"redirect\": \"/blog/writeBlog\"}");
+            }
         }else{
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"status\": \"failure\", \"redirect\": \"/blog/writeBlog\"}");
+            int result = (Integer) boardService.postBlog(boardDto);
+            if((result>0)){
+                filesDto.setBoardId(String.valueOf(result));
+                boardService.saveFile(files, filesDto);
+                return ResponseEntity.ok().body("{\"status\": \"success\", \"redirect\": \"/blog/\"}");
+            }else{
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"status\": \"failure\", \"redirect\": \"/blog/writeBlog\"}");
+            }
         }
     }
     @GetMapping("/blogTotal")

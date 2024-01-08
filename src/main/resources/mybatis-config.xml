@@ -13,6 +13,7 @@
         <typeAlias type="com.codingrecipe.member.dto.ProductsDto" alias="product"/>
         <typeAlias type="com.codingrecipe.member.dto.InquiriesDto" alias="inquiry"/>
         <typeAlias type="com.codingrecipe.member.dto.PageDto" alias="page"/>
+        <typeAlias type="com.codingrecipe.member.dto.FilesDto" alias="file"/>
     </typeAliases>
 </configuration>
 
