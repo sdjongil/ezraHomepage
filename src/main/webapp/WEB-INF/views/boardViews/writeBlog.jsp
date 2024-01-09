@@ -73,9 +73,9 @@
         </div>
         <h4>You can drag image files into the content area.</h4>
         <h4>Disallowed files  : .exe, .bat, .cmd, .sh, .msi, .com, .js, .vbs, .ps1, .php, .py, .rb, .pl...</h4>
-        <div class="w-commerce-commercecheckoutbillingaddresstogglewrapper">
-            <input type="file" id="file" name="file"  style="margin: 5px">
-        </div>
+<%--        <div class="w-commerce-commercecheckoutbillingaddresstogglewrapper">--%>
+<%--            <input type="file" id="file" name="file"  style="margin: 5px">--%>
+<%--        </div>--%>
         <div>
             <input  class="cta big-submit w-button" type="submit" value="Submit">
         </div>
@@ -162,9 +162,6 @@
         formData.append('boardContents', content);
         formData.append('boardWriter', nickName);
         formData.append('category', category);
-        for (let [key, value] of formData.entries()) {
-            console.log(key, value);
-        }
 
         fetch('/blog/postBlog', {
             method: 'POST',
@@ -176,13 +173,11 @@
                 return response.json();
             }).then(data => {
             alert("success");
-            // 성공 시 리디렉션
-            // window.location.href = data.redirect;
+            window.location.href = data.redirect;
             }).catch(error => {
             error.json().then(errorData => {
                 alert("please try again");
-                // 실패 시 리디렉션
-                // window.location.href = errorData.redirect;
+                window.location.href = errorData.redirect;
             });
         });
 

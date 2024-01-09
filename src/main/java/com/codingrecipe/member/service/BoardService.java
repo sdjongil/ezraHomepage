@@ -2,6 +2,7 @@ package com.codingrecipe.member.service;
 
 import com.codingrecipe.member.dto.BoardDto;
 import com.codingrecipe.member.dto.FilesDto;
+import com.codingrecipe.member.dto.LikesDto;
 import com.codingrecipe.member.dto.PageDto;
 import com.codingrecipe.member.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class BoardService{
     private final BoardRepository boardRepository;
-    private String uploadPath = "D:\\spring1226\\springWorkPlace\\src\\main\\webapp\\resources\\static\\userFiles\\userImages";
+    private String uploadPath = "D:\\spring1226\\springWorkPlace\\src\\main\\webapp\\resources\\static\\userFiles\\";
     public int totalPage() {
         return boardRepository.totalPage();
     }
@@ -33,18 +34,8 @@ public class BoardService{
     public BoardDto blogDetail(Integer id) {
         return boardRepository.blogDetail(id);
     }
-//    public String blogUpload(MultipartFile file){
-//             try{
-//                 String fileName = file.getOriginalFilename();
-//                 Path path = Paths.get(uploadPath + fileName);
-//                 Files.copy(file.getInputStream(),path);
-//                 return "Success";
-//             }catch (IOException e){
-//                 e.printStackTrace();
-//                 return "Failure";
-//             }
-//    }
-    public void saveFile(MultipartFile[] files, FilesDto filesDto){
+
+    public void saveFile(MultipartFile[] files, int boardId){
         for (MultipartFile file : files){
             if(!file.isEmpty()){
                 try {
@@ -54,15 +45,15 @@ public class BoardService{
                     if (lastIndexOfDot != -1) {
                         extension = fileName.substring(lastIndexOfDot + 1);
                     }
+                    FilesDto filesDto = new FilesDto();
                     filesDto.setFileExtension(extension);
-
+                    filesDto.setBoardId(boardId);
                     UUID uuid = UUID.randomUUID();
                     filesDto.setFileName(uuid.toString());
-                    System.out.println(filesDto.getFileName());
 
                     Path savePath = Paths.get(uploadPath + filesDto.getFileName()+"."+extension);
                     File saveFile = savePath.toFile();
-                    // 파일을 저장합니다.
+                    // 파일 저장
                     file.transferTo(saveFile);
                     boardRepository.saveFile(filesDto);
                 }catch (IOException e){
@@ -70,5 +61,27 @@ public class BoardService{
                 }
             }
         }
+    }
+
+    public List<FilesDto> files(Integer id) {
+        return boardRepository.file(id);
+    }
+
+
+    public boolean findLike(LikesDto likesDto) {
+        int result = boardRepository.findLike(likesDto);
+        if(result>0){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public int saveLike(LikesDto likesDto) {
+        return boardRepository.saveLike(likesDto);
+    }
+
+    public void increaseLike(Integer id) {
+        boardRepository.increaseLike(id);
     }
 }

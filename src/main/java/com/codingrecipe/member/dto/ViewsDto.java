@@ -7,8 +7,8 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class FilesDto {
-    private String fileName;
-    private Integer boardId;
-    private String fileExtension;
+public class ViewsDto {
+    private Integer viewId;
+    private String boardId;
+    private String memberNickname;
 }

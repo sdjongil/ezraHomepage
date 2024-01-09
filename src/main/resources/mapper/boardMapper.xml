@@ -23,6 +23,12 @@
     <select id="findMaxId" resultType="Integer" >
         SELECT MAX(TO_NUMBER(id)) FROM board_table
     </select>
+    <update id="increaseView" parameterType="Integer">
+        update board_table set views= views +1 where id = #{id}
+    </update>
+    <update id="increaseLike" parameterType="Integer">
+        update board_table set boardHits = boardHits + 1 where id = #{id}
+    </update>
 </mapper>
 
 

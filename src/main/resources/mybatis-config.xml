@@ -14,6 +14,8 @@
         <typeAlias type="com.codingrecipe.member.dto.InquiriesDto" alias="inquiry"/>
         <typeAlias type="com.codingrecipe.member.dto.PageDto" alias="page"/>
         <typeAlias type="com.codingrecipe.member.dto.FilesDto" alias="file"/>
+        <typeAlias type="com.codingrecipe.member.dto.ViewsDto" alias="Views"/>
+        <typeAlias type="com.codingrecipe.member.dto.LikesDto" alias="Likes"/>
     </typeAliases>
 </configuration>
 

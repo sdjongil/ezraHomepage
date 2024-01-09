@@ -2,6 +2,7 @@ package com.codingrecipe.member.repository;
 
 import com.codingrecipe.member.dto.BoardDto;
 import com.codingrecipe.member.dto.FilesDto;
+import com.codingrecipe.member.dto.LikesDto;
 import com.codingrecipe.member.dto.PageDto;
 import lombok.RequiredArgsConstructor;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -28,16 +29,37 @@ public class BoardRepository{
     public int postBlog(BoardDto boardDto) {
         sql.insert("Board.postBlog", boardDto);
         int ss = sql.selectOne("Board.findMaxId");
-        System.out.println("get Max Id"+ss);
         return ss;
     }
 
     public BoardDto blogDetail(Integer id) {
+        sql.update("Board.increaseView", id);
         return sql.selectOne("Board.blogDetail",id);
     }
 
 
     public void saveFile(FilesDto filesDto) {
         sql.insert("File.save",filesDto);
+    }
+
+    public List<FilesDto> file(Integer id) {
+        return sql.selectList("File.findByBoardId", id);
+    }
+
+
+    public int findLike(LikesDto likesDto) {
+        if(sql.selectOne("Likes.findLike",likesDto) == null){
+            return 0;
+        }else {
+            return 1;
+        }
+    }
+
+    public int saveLike(LikesDto likesDto) {
+        return sql.insert("Likes.saveLike", likesDto);
+    }
+
+    public void increaseLike(Integer id) {
+        sql.update("Board.increaseLike", id);
     }
 }

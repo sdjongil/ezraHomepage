@@ -71,7 +71,7 @@ public class MemberController {
         return ResponseEntity.ok().headers(headers).build();
     }
     @GetMapping("/myprofile")
-    public String myprofile(){
+    public String myProfile(){
         return "memberViews/myProfile";
     }
     @GetMapping("/main")
