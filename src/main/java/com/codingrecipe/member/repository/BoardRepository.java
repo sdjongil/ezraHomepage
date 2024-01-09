@@ -33,7 +33,6 @@ public class BoardRepository{
     }
 
     public BoardDto blogDetail(Integer id) {
-        sql.update("Board.increaseView", id);
         return sql.selectOne("Board.blogDetail",id);
     }
 
@@ -42,7 +41,7 @@ public class BoardRepository{
         sql.insert("File.save",filesDto);
     }
 
-    public List<FilesDto> file(Integer id) {
+    public List<FilesDto> findFilesById(Integer id) {
         return sql.selectList("File.findByBoardId", id);
     }
 
@@ -61,5 +60,14 @@ public class BoardRepository{
 
     public void increaseLike(Integer id) {
         sql.update("Board.increaseLike", id);
+    }
+
+
+    public int deletePost(Integer boardId) {
+        return sql.delete("Board.deleteBlog", boardId);
+    }
+
+    public int deleteFiles(Integer boardId) {
+        return sql.delete("File.deleteFiles", boardId);
     }
 }

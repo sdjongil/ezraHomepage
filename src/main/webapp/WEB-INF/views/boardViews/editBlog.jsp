@@ -67,15 +67,15 @@
         </div>
         <div class="w-commerce-commercecheckoutblockcontent block-content">
             <div  id="drop-area">
-            <label for="content">Content:</label>
-            <textarea class="input-underline w-input" id="content" name="content" rows="6" cols="50" required></textarea>
+                <label for="content">Content:</label>
+                <textarea class="input-underline w-input" id="content" name="content" rows="6" cols="50" required></textarea>
             </div>
         </div>
         <h4>You can drag image files into the content area.</h4>
         <h4>Disallowed files  : .exe, .bat, .cmd, .sh, .msi, .com, .js, .vbs, .ps1, .php, .py, .rb, .pl...</h4>
-<%--        <div class="w-commerce-commercecheckoutbillingaddresstogglewrapper">--%>
-<%--            <input type="file" id="file" name="file"  style="margin: 5px">--%>
-<%--        </div>--%>
+        <%--        <div class="w-commerce-commercecheckoutbillingaddresstogglewrapper">--%>
+        <%--            <input type="file" id="file" name="file"  style="margin: 5px">--%>
+        <%--        </div>--%>
         <div>
             <input  class="cta big-submit w-button" type="submit" value="Submit">
         </div>
@@ -167,14 +167,14 @@
             method: 'POST',
             body: formData,
         }).then(response => {
-                if (!response.ok) {
-                    throw response;
-                }
-                return response.json();
-            }).then(data => {
+            if (!response.ok) {
+                throw response;
+            }
+            return response.json();
+        }).then(data => {
             alert("success");
             window.location.href = data.redirect;
-            }).catch(error => {
+        }).catch(error => {
             error.json().then(errorData => {
                 alert("please try again");
                 window.location.href = errorData.redirect;

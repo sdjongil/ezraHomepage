@@ -39,4 +39,8 @@ public class MemberService{
             return "no";
         }
     }
+
+    public MemberDto findByNick(String boardWriter) {
+        return memberRepository.findByNickname(boardWriter);
+    }
 }

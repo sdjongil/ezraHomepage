@@ -71,11 +71,12 @@
 <div id="footer-container"></div>
 </body>
 <script>
-    var nickName = "<%= request.getAttribute("nickName") %>";
-
+    let nickName = "<%= request.getAttribute("nickName")%>";
     // 'anonymous'일 경우 경고창 표시
     if (nickName === 'anonymous') {
         alert('Please log in first');
+    }else if(nickName === 'Others'){
+        alert('Only your own account is available.');
     }
 </script>
 <script>

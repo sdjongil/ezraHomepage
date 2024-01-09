@@ -29,6 +29,9 @@
     <update id="increaseLike" parameterType="Integer">
         update board_table set boardHits = boardHits + 1 where id = #{id}
     </update>
+    <delete id="deleteBlog">
+        delete from board_table where id = #{id}
+    </delete>
 </mapper>
 
 

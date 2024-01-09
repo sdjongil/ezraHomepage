@@ -51,8 +51,8 @@
             </a>
         </div>
         <div>
-            <div class="tag" style="display: inline-flex; cursor: pointer;">Edit</div>
-            <div class="tag" style="display: inline-flex; cursor: pointer;">Delete</div>
+            <div class="tag protected" style="display: inline-flex; cursor: pointer;">Edit</div>
+            <div class="tag protected" style="display: inline-flex; cursor: pointer;">Delete</div>
         </div>
         <div class="space-40"></div>
         <div class="w-dyn-list">
@@ -146,7 +146,14 @@
             });
         }
     });
-
+    let protects = [];
+    protects = document.getElementsByClassName("protected")
+    protects[0].addEventListener('click', function (){
+        window.location.href = "/protected/?nick="+boardWriter+"&id="+boardId+"&forWhat=Edit post";
+    })
+    protects[1].addEventListener('click', function (){
+        window.location.href = "/protected/?nick="+boardWriter+"&id="+boardId+"&forWhat=Delete post";
+    })
 
 </script>
 </html>

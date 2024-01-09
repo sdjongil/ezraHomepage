@@ -10,5 +10,7 @@
     <select id="findByBoardId" parameterType="file" resultType="file">
         select * from board_files where boardId = #{boardId}
     </select>
-
+    <delete id="deleteFiles" parameterType="Integer">
+        delete from board_files where boardId = #{boardId}
+    </delete>
 </mapper>

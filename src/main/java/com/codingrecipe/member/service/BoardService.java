@@ -63,8 +63,8 @@ public class BoardService{
         }
     }
 
-    public List<FilesDto> files(Integer id) {
-        return boardRepository.file(id);
+    public List<FilesDto> findFilesById(Integer id) {
+        return boardRepository.findFilesById(id);
     }
 
 
@@ -83,5 +83,28 @@ public class BoardService{
 
     public void increaseLike(Integer id) {
         boardRepository.increaseLike(id);
+    }
+
+
+    public boolean deletePost(Integer boardId) {
+        BoardDto boardDto = boardRepository.blogDetail(boardId);
+        if (boardDto.getIsFile()=='T'){
+            try {
+                List<FilesDto> filesDtos = boardRepository.findFilesById(boardId);
+                if(!filesDtos.isEmpty()){
+                    System.out.println("dfsdfsd");
+                    for (FilesDto filesDto : filesDtos){
+                        String filePath = uploadPath+filesDto.getFileName()+"."+filesDto.getFileExtension();
+                        File fileDelete = new File(filePath);
+                        fileDelete.delete();
+                    }
+                    boardRepository.deleteFiles(boardId);
+                }
+            }catch (Exception e){
+                System.out.println(e.getMessage());
+            }
+
+        }
+        return boardRepository.deletePost(boardId) > 0;
     }
 }

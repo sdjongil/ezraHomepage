@@ -1,10 +1,8 @@
 package com.codingrecipe.member.controller;
 
-import com.codingrecipe.member.dto.BoardDto;
-import com.codingrecipe.member.dto.FilesDto;
-import com.codingrecipe.member.dto.LikesDto;
-import com.codingrecipe.member.dto.PageDto;
+import com.codingrecipe.member.dto.*;
 import com.codingrecipe.member.service.BoardService;
+import com.codingrecipe.member.service.MemberService;
 import com.codingrecipe.member.utils.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,6 +24,7 @@ import static com.codingrecipe.member.controller.HomeController.log;
 @RequiredArgsConstructor
 public class BlogController {
     private final BoardService boardService;
+    private final MemberService memberService;
     @Value("${jwt.secret}")
     private String secretKey;
 
@@ -102,7 +101,7 @@ public class BlogController {
         likesDto.setBoardId(id);
         boolean userAlreadyLiked = boardService.findLike(likesDto);
         if (boardDto.getIsFile() == 'T') {
-            List<FilesDto> filesDtos = boardService.files(id);
+            List<FilesDto> filesDtos = boardService.findFilesById(id);
             model.addAttribute("files",filesDtos);
         }
         model.addAttribute("board",boardDto);
@@ -121,6 +120,32 @@ public class BlogController {
         }else {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred");
         }
+    }
+    @PostMapping("/editBlog")
+    @ResponseBody
+    public ResponseEntity<?> editBlog(
+            @RequestParam("forWhat") String forWhat, @RequestParam("boardWriter") String boardWriter,
+            @RequestParam("boardId") Integer boardId, @RequestParam("pass") String pass){
+        MemberDto memberDto = memberService.findByNick(boardWriter);
+        //패스워드 일치
+        if(!memberDto.getMemberPassword().equals(pass)){
+            return ResponseEntity.ok().body("{\"status\": \"edit\", \"redirect\": \"/blog/edit\"}");
+        }
+        if(forWhat.equals("Edit post")){
+            return ResponseEntity.ok().body("{\"status\": \"success\", \"redirect\": \"/blog/\"}");
+        }else if(forWhat.equals("Delete post")){
+            if(boardService.deletePost(boardId)){
+                return ResponseEntity.ok().body("{\"status\": \"success\", \"redirect\": \"/blog/\"}");
+            }else{
+                return ResponseEntity.ok().body("{\"status\": \"failed\", \"redirect\": \"/blog/detail?id="+boardId+"\"}");
+            }
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"status\": \"failure\", \"redirect\": \"/blog/\"}");
+    }
+
+    @GetMapping("/edit")
+    public String editPage(){
+        return "/boardViews/editBlog";
     }
 }
 
