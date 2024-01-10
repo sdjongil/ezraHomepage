@@ -47,36 +47,54 @@
         <div class="space-40"></div>
         <div data-w-id="754fcd17-56b8-7a50-2cb2-605d67e10a21" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="wrap-filers">
             <div class="w-dyn-list">
-                <div role="list" class="list-filters w-dyn-items">
-                    <div role="listitem" class="w-dyn-item">
-                        <a href="#" class="link-filter"></a>
+                <div class="optionBox" style="display: flex">
+                    <div id="orderBy" class="tag" style="cursor: pointer;"
+                         onclick="toggleOptions()">Order by</div>
+                    <div id="options"  style="display: none;">
+                        <div class="tag" style="cursor : pointer;" onclick="orderBy('time')">Time</div>
+                        <div class="tag" style="cursor : pointer;" onclick="orderBy('likes')">Likes</div>
+                        <div class="tag" style="cursor : pointer;" onclick="orderBy('views')">Views</div>
                     </div>
-                </div>
-                <div>
-                    <a href="/blog/writeBlog"><div class="tag" style="display: inline-flex; cursor: pointer;">Write</div></a>
-                    <div class="tag" style="display: inline-flex; cursor: pointer;">Order by</div>
+                    <div id="Sort" class="tag" style="cursor: pointer;"
+                         onclick="toggleSortOptions()">Sort</div>
+                    <div id="SortOptions"  style="display: none;">
+                        <div class="tag" style="cursor : pointer;" onclick="sortBy('DESC')">DESC</div>
+                        <div class="tag" style="cursor : pointer;" onclick="sortBy('ASC')">ASC</div>
+                    </div>
+                    <div id="category" class="tag" style="cursor: pointer;"
+                         onclick="toggleCategoryOptions()">Category</div>
+                    <div id="categoryOptions"  style="display: none;">
+                        <div class="tag" style="cursor : pointer;" onclick="categoryBy('English Study')">English Study</div>
+                        <div class="tag" style="cursor : pointer;" onclick="categoryBy('Casual Talk')">Casual Talk</div>
+                        <div class="tag" style="cursor : pointer;" onclick="categoryBy('Tech Study')">Tech Study</div>
+                        <div class="tag" style="cursor : pointer;" onclick="categoryBy('Algorithms')">Algorithms</div>
+                        <div class="tag" style="cursor : pointer;" onclick="categoryBy('All')">All</div>
+                    </div>
+                    <div class="tag" id="searchButton" style="margin-left: auto; cursor:pointer;">
+                        Go Search
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="optionBox" style="margin-top: 15px;">
+            <div style="margin-left: auto;">
+                <div>
+                    <input type="text" class="input-underline" name="name" style="height: 50px; font-size: 25px; margin-bottom: 12px;"
+                           placeholder="Search by title" id="name">
+                </div>
+                <div>
+                    <a href="#" class="cta w-button">Go</a>
+                </div>
+            </div>
+        </div>
+
         <div class="space-120 projects-space" style="display: flex">
-            <div>
-                <h4>Category</h4>
-            </div>
-            <div id="title">
-                <h4>Title</h4>
-            </div>
-            <div>
-                <h4>Writer</h4>
-            </div>
-            <div>
-                <h4>date</h4>
-            </div>
-            <div>
-                <h4>hits</h4>
-            </div>
-            <div>
-                <h4>views</h4>
-            </div>
+            <div><h4>Category</h4></div>
+            <div id="title"><h4>Title</h4></div>
+            <div><h4>Writer</h4></div>
+            <div><h4>date</h4></div>
+            <div><h4>hits</h4></div>
+            <div><h4>views</h4></div>
         </div>
         <div class="w-dyn-list">
             <div role="list" class="list-projects-b w-dyn-items">
@@ -86,7 +104,6 @@
                         <table class="blog-board-table">
                             <tbody>
                                 <c:forEach items="${boardList}" var="board" varStatus="status">
-
                                     <tr class="userBoard" style="background-color:${status.index % 2 == 0 ? "#000000;" : "#101005;"}; display: flex;
                                             margin-top: 5px; padding: 5px">
                                         <td>${board.category}</td>
@@ -101,18 +118,26 @@
                                 </c:forEach>
                             </tbody>
                         </table>
-                        <div id="pagination"></div>
+                        <div id="pagination" ></div>
+                        <a href="/blog/writeBlog" style="text-decoration: none">
+                            <div class="tag" style="display:flex; cursor: pointer;">Write</div>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 <div id="footer-container"></div>
 </body>
 <style>
-
+    .optionBox{
+        display: flex;
+    }
+    .optionBox > div{
+        display: inline-flex;
+        margin: 2px;
+    }
     .projects-space > div {
         flex: 1;
     }
@@ -150,6 +175,41 @@
 <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=658e8233ef485db1d618da5a"
         type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath}/resources/static/js/webflow.js" type="text/javascript"></script>
+<script>
+    var orderSrot = document.getElementById("Sort");
+    var order = document.getElementById("orderBy");
+    var category = document.getElementById("category")
+
+
+    function toggleCategoryOptions(){
+        var categoryOptions = document.getElementById("categoryOptions");
+        categoryOptions.style.display = (categoryOptions.style.display === "none" ? "block" : "none")
+    }
+    function categoryBy(option) {
+        category.innerText = option;
+        document.getElementById("categoryOptions").style.display = "none";
+    }
+
+    function toggleSortOptions(){
+        var sortOptions = document.getElementById("SortOptions");
+        sortOptions.style.display = (sortOptions.style.display === "none" ? "block" : "none")
+    }
+    function sortBy(option) {
+        orderSrot.innerText = option;
+        document.getElementById("SortOptions").style.display = "none";
+    }
+
+    function toggleOptions() {
+        var options = document.getElementById("options");
+        options.style.display = (options.style.display === "none" ? "block" : "none");
+    }
+    function orderBy(option) {
+        order.innerText = option;
+        document.getElementById("options").style.display = "none";
+    }
+
+
+</script>
 <script type="module">
     import { PageDto } from "../../../resources/static/js/PageDto.js";
 
@@ -206,7 +266,7 @@
         }
         container.appendChild(pageLink);
     }
-
+    console.log()
 </script>
 
 </html>

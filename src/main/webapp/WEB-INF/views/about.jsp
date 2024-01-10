@@ -46,7 +46,7 @@
                 </div>
                 <div data-w-id="13a27ebb-734c-3d0d-457e-0dd2e3b66281" class="wrap-big-text-general">
                     <div class="big-text subtitle-hero-about-a" style="font-size: 36px">
-                        When my first waching Python on YouTube, there was sparked a passion in me.
+                        When my first watching Python on YouTube, there was sparked a passion in me.
                         Maybe I started late, but I think I'm quickly found what I love to do.
                         There are always bigger mountain, but I feel proud of what I've achieved,
                         whenever I look back. It gives me the strength to keep going.
@@ -70,15 +70,15 @@
                 </a>
                 <a data-w-tab="Tab 2" class="tab-link w-inline-block w-tab-link">
                     <div class="tab-circle"></div>
-                    <div class="text-tab-link">User Research</div>
+                    <div class="text-tab-link">What's a challenging experience you've had on a team project?</div>
                 </a>
                 <a data-w-tab="Tab 3" class="tab-link w-inline-block w-tab-link">
                     <div class="tab-circle"></div>
-                    <div class="text-tab-link">UX/UI Design</div>
+                    <div class="text-tab-link">What if I need to use new technology?</div>
                 </a>
                 <a data-w-tab="Tab 4" class="tab-link w-inline-block w-tab-link">
                     <div class="tab-circle"></div>
-                    <div class="text-tab-link">Webflow development</div>
+                    <div class="text-tab-link">What company do you want to work for?</div>
                 </a>
             </div>
             <div id="w-node-eac4529d-08a0-66f9-2c8a-a83a964cab21-964cab0a" class="tabs-content w-tab-content">
@@ -93,17 +93,19 @@
                                 <p style="padding-top: 9px" id="text-container">개발자가 되려는 이유</p>
                             </div>
                         </div>
-                        <p style="font-size: 20px; line-height: 1.2;">Back in high school I was burnt out on schoolwork😢<br>
+                        <p style="font-size: 20px; line-height: 1.2;">
+                            Back in high school I was burnt out on schoolwork<br>
                             So I transferred school that no studying, no nightly self-study.
-                            All my friends were doing well, so I felt like A loser😢
+                            All my friends were doing well, so I felt like A loser
                             willpower, unreliability, laziness.. have taken deep in my mind
-                            but learning to coding changed them😊
-                            <br>I've been studying and coding after work, on my days off. It's fun💕 And most importantly I gained confidence.
+                            but learning to coding changed them
+                            <br>I've been studying and coding after work, on my days off. It's fun And most importantly I gained confidence.
                         Now I have self-control, passion and even determination. Do you know what this changed in my life?
                         I able to overcome oversleeping, overeating, addictions
-                            <br>1. I wake up with my first alarm 😎
-                            <br>2. I cut back on soda ✌✌
-                            <br>3. I started intermittent fasting👏
+                            <br>1. I wake up with my first alarm
+                            <br>2. I cut back on soda
+                            <br>3. I started intermittent fasting
+                            <br>
                             I felt sooooo much better with these small but big changes.
                             Our lives are determined by our actions and our willpower. Do not forget that you can always make a new start🤞
                         </p>
@@ -119,7 +121,12 @@
                                 <div>Qualitative</div>
                             </div>
                         </div>
-                        <p>User research is a vital aspect of UX design that helps to understand the needs, behaviors, and preferences of the target audience. This information is then used to inform the design decisions and improve the overall user experience. User research methods such as usability testing, surveys, and interviews provide valuable insights into how users interact with a product and their pain points. By conducting user research, we can identify any issues and opportunities for improvement, and make data-driven decisions to enhance the usability and satisfaction of the product.</p>
+                        <p>
+                            The first time I worked on a team project, the hardest part was planning before we started.
+                            We didn't all know what we needed to do.
+                            However, when things didn't go as planned, we were able to share and discuss with each other.
+                            It was more efficient than working alone.
+                        </p>
                     </div>
                 </div>
                 <div data-w-tab="Tab 3" class="w-tab-pane">
@@ -132,7 +139,13 @@
                                 <div>Figma designs</div>
                             </div>
                         </div>
-                        <p>We work closely with clients to understand their goals and gather feedback from users to identify pain points and areas for improvement. Through the use of design thinking and user-centered design, we create solutions that are tailored to the user&#x27;s needs, while also aligning with the company&#x27;s vision. Our goal is to create products that are intuitive, efficient, and visually pleasing to the user.</p>
+                        <p>When I have to use a new technology, I use YouTube to get a general knowledge of the technology  before that.
+                            I don't watch every single thing, Just when I'm driving, doing housework, etc.
+                            I watch the whole thing over and over again 2-3 times.
+                            Then, when I actually have to use it, I learn it in detail.
+                            From this point on, I read books than YouTube.
+                            Once I get the flow, it's much easier to understand the book
+                            and it's good to know more details.</p>
                     </div>
                 </div>
                 <div data-w-tab="Tab 4" class="w-tab-pane">
@@ -148,11 +161,11 @@
                                 <div>UX Workshops</div>
                             </div>
                         </div>
-                        <p>This platform allows developers and designers to build responsive websites without having
-                            to write code, making it a great option for creating visually stunning and user-friendly
-                            websites quickly. Our team of experts has the experience and knowledge to utilize Webflow&#x27;s
-                            features to deliver fully responsive, visually appealing, and user-friendly websites that align
-                            with the company&#x27;s vision.<br></p>
+                        <p>The best company for me is one where I can "learn".
+                            Especially in the first year or two, I still don't know what kind of developer I want to be.
+                            I want to go to a company that can help me get a sense of direction as to what kind of developer I should be.
+                            More specifically, I want to go to a company where I have good seniority,
+                            where I and the company can trust each other. and a company where I can work on the basics.</p>
                     </div>
                 </div>
             </div>

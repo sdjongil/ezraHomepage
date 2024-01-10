@@ -84,6 +84,7 @@
 
 </body>
 <script>
+
     let fileNames = [];
     let filesList = [];
     document.getElementById('drop-area').addEventListener('drop', function(e) {
