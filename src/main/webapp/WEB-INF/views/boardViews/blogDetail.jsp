@@ -156,4 +156,10 @@
     })
 
 </script>
+<script>
+    let status = "<%= request.getAttribute("status")%>";
+    if (status === 'passWrong') {
+        alert('Please check your password');
+    }
+</script>
 </html>

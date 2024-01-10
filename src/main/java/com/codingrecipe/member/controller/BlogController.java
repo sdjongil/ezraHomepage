@@ -4,6 +4,8 @@ import com.codingrecipe.member.dto.*;
 import com.codingrecipe.member.service.BoardService;
 import com.codingrecipe.member.service.MemberService;
 import com.codingrecipe.member.utils.JwtUtil;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -13,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.Collections;
 import java.util.List;
 
@@ -69,7 +72,7 @@ public class BlogController {
                                       @RequestParam(name = "fileData", required = false) MultipartFile[] files){
         //게시물 저장과 동시에 id값 가져옴
         if(files == null){
-            boardDto.setIsFile('F');
+            boardDto.setIsFile("F");
             int result = boardService.postBlog(boardDto);
             if((result>0)){
                 return ResponseEntity.ok().body("{\"status\": \"success\", \"redirect\": \"/blog/\"}");
@@ -77,7 +80,8 @@ public class BlogController {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"status\": \"failure\", \"redirect\": \"/blog/writeBlog\"}");
             }
         }else{
-            boardDto.setIsFile('T');
+            boardDto.setIsFile("T");
+            //result = 게시물 번호로 리턴
             int result = boardService.postBlog(boardDto);
             if((result>0)){
                 boardService.saveFile(files, result);
@@ -100,7 +104,7 @@ public class BlogController {
         likesDto.setMemberNickname(boardDto.getBoardWriter());
         likesDto.setBoardId(id);
         boolean userAlreadyLiked = boardService.findLike(likesDto);
-        if (boardDto.getIsFile() == 'T') {
+        if (boardDto.getIsFile().equals("T")) {
             List<FilesDto> filesDtos = boardService.findFilesById(id);
             model.addAttribute("files",filesDtos);
         }
@@ -129,10 +133,10 @@ public class BlogController {
         MemberDto memberDto = memberService.findByNick(boardWriter);
         //패스워드 일치
         if(!memberDto.getMemberPassword().equals(pass)){
-            return ResponseEntity.ok().body("{\"status\": \"edit\", \"redirect\": \"/blog/edit\"}");
+            return ResponseEntity.ok().body("{\"status\": \"passWrong\", \"redirect\": \"/blog/detail?id="+boardId+"\"}");
         }
         if(forWhat.equals("Edit post")){
-            return ResponseEntity.ok().body("{\"status\": \"success\", \"redirect\": \"/blog/\"}");
+            return ResponseEntity.ok().body("{\"status\": \"success\", \"redirect\": \"/blog/edit?id="+boardId+"\"}");
         }else if(forWhat.equals("Delete post")){
             if(boardService.deletePost(boardId)){
                 return ResponseEntity.ok().body("{\"status\": \"success\", \"redirect\": \"/blog/\"}");
@@ -144,8 +148,58 @@ public class BlogController {
     }
 
     @GetMapping("/edit")
-    public String editPage(){
+    public String editPage(Model model, @RequestParam("id")Integer boardId) throws JsonProcessingException {
+        BoardDto boardDto = boardService.blogDetail(boardId);
+        if (boardDto.getIsFile().equals("T")) {
+            List<FilesDto> filesDtos = boardService.findFilesById(boardId);
+            ObjectMapper mapper = new ObjectMapper();
+            String filesJson = mapper.writeValueAsString(filesDtos);
+            model.addAttribute("filesJson", filesJson);
+        }
+        model.addAttribute("board", boardDto);
         return "/boardViews/editBlog";
+    }
+    @PostMapping("/updateBlog")
+    public ResponseEntity<?> updateBlog(@ModelAttribute BoardDto boardDto,
+                                        @RequestParam(name = "deleteFile", required = false) String[] deleteFiles,
+                                        @RequestParam(name = "fileData", required = false) MultipartFile[] files){
+        //새로운 파일있으면
+        if(files != null){
+            int result = boardService.updateBlog(boardDto);
+            if((result>0)){
+                int id = Math.toIntExact(boardDto.getId());
+                boardService.saveFile(files, id);
+                return ResponseEntity.ok().body("{\"status\": \"success\", \"redirect\": \"/blog/\"}");
+            }else{
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"status\": \"failure\", \"redirect\": \"/blog/writeBlog\"}");
+            }
+            //새로운 파일 없으면
+        }else {
+            //기존 파일 변경 없으면
+            if (deleteFiles ==null){
+                int result = boardService.updateBlog(boardDto);
+                if((result>0)){
+                    return ResponseEntity.ok().body("{\"status\": \"success\", \"redirect\": \"/blog/\"}");
+                }else {
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"status\": \"failure\", \"redirect\": \"/blog/writeBlog\"}");
+                }
+            //기본 파일 변경(삭제) 했으면
+            }else {
+                int result = boardService.updateBlog(boardDto);
+                if((result>0)){
+                    for (String file : deleteFiles){
+                        boardService.deleteOnlyFile(file);
+                        String uploadPath = "D:\\spring1226\\springWorkPlace\\src\\main\\webapp\\resources\\static\\userFiles\\";
+                        String filePath = uploadPath +file;
+                        File fileDelete = new File(filePath);
+                        fileDelete.delete();
+                    }
+                    return ResponseEntity.ok().body("{\"status\": \"success\", \"redirect\": \"/blog/\"}");
+                }else{
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"status\": \"failure\", \"redirect\": \"/blog/writeBlog\"}");
+                }
+            }
+        }
     }
 }
 

@@ -32,6 +32,10 @@
     <delete id="deleteBlog">
         delete from board_table where id = #{id}
     </delete>
+    <update id="updateBlog" parameterType="board">
+        update board_table set boardTitle = #{boardTitle}, boardContents = #{boardContents},
+                               category = #{category}, isFile = #{isFile} where id = #{id}
+    </update>
 </mapper>
 
 

@@ -14,9 +14,9 @@ public class BoardDto {
     private String boardWriter;
     private String boardTitle;
     private String boardContents;
-    private int boardHits;
+    private Integer boardHits;
     private Timestamp boardCreatedTime;
-    private int views;
+    private Integer views;
     private String category;
-    private char isFile;
+    private String isFile;
 }

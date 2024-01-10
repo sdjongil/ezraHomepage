@@ -13,4 +13,7 @@
     <delete id="deleteFiles" parameterType="Integer">
         delete from board_files where boardId = #{boardId}
     </delete>
+    <delete id="deleteFileByFileName" parameterType="String">
+        delete from board_files where fileName = #{fileName}
+    </delete>
 </mapper>

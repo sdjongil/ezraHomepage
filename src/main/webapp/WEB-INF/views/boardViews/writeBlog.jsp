@@ -68,14 +68,12 @@
         <div class="w-commerce-commercecheckoutblockcontent block-content">
             <div  id="drop-area">
             <label for="content">Content:</label>
-            <textarea class="input-underline w-input" id="content" name="content" rows="6" cols="50" required></textarea>
+            <textarea class="input-underline w-input" id="content" name="content" rows="6"
+                      cols="50" required></textarea>
             </div>
         </div>
         <h4>You can drag image files into the content area.</h4>
         <h4>Disallowed files  : .exe, .bat, .cmd, .sh, .msi, .com, .js, .vbs, .ps1, .php, .py, .rb, .pl...</h4>
-<%--        <div class="w-commerce-commercecheckoutbillingaddresstogglewrapper">--%>
-<%--            <input type="file" id="file" name="file"  style="margin: 5px">--%>
-<%--        </div>--%>
         <div>
             <input  class="cta big-submit w-button" type="submit" value="Submit">
         </div>
@@ -102,7 +100,6 @@
             }
             fileNames.push(file.name);
             filesList.push(file);
-            console.log("Add", fileNames, ":", filesList)
             //이미지 div태그
             let imgWrap = document.createElement("div");
             imgWrap.classList.add("userPictureWrap");
@@ -181,9 +178,6 @@
             });
         });
     })
-
-
-
 
 
 </script>

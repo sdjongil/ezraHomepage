@@ -1,5 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
 <!--  Last Published: Fri Dec 29 2023 08:27:37 GMT+0000 (Coordinated Universal Time)  -->
@@ -58,24 +57,23 @@
                     <option value="algorithms">Algorithms</option>
                 </select>
             </label>
-            <label style="font-size: 28px">Writer : ${nickName}</label>
-            <input type="hidden" id="nickName" name="nickName" value="${nickName}">
+            <label style="font-size: 28px">Writer : ${board.boardWriter}</label>
+            <input type="hidden" id="nickName" name="nickName" value="${board.boardWriter}">
+            <input type="hidden" id="boardId" name="boardId" value="${board.id}">
         </div>
         <div class="w-commerce-commercecheckoutblockcontent block-content">
-            <label for="title" >Title:</label>
-            <input class="input-underline w-input" type="text" id="title" name="title" required>
+            <label for="title" >Title: </label>
+            <input class="input-underline w-input" type="text" id="title" name="title" required value="${board.boardTitle}">
         </div>
         <div class="w-commerce-commercecheckoutblockcontent block-content">
-            <div  id="drop-area">
+            <div id="drop-area" >
                 <label for="content">Content:</label>
-                <textarea class="input-underline w-input" id="content" name="content" rows="6" cols="50" required></textarea>
+                <textarea class="input-underline w-input" id="content" name="content" rows="6"
+                          cols="50" required>${board.boardContents}</textarea>
             </div>
         </div>
         <h4>You can drag image files into the content area.</h4>
         <h4>Disallowed files  : .exe, .bat, .cmd, .sh, .msi, .com, .js, .vbs, .ps1, .php, .py, .rb, .pl...</h4>
-        <%--        <div class="w-commerce-commercecheckoutbillingaddresstogglewrapper">--%>
-        <%--            <input type="file" id="file" name="file"  style="margin: 5px">--%>
-        <%--        </div>--%>
         <div>
             <input  class="cta big-submit w-button" type="submit" value="Submit">
         </div>
@@ -86,8 +84,20 @@
 
 </body>
 <script>
-    let fileNames = [];
-    let filesList = [];
+    var files = <%= request.getAttribute("filesJson")%>
+    var fileNumber;
+    if(!files == null){
+        fileNumber = files.length;
+    }
+    var deleteFile = [];
+    var fileNames = [];
+    var filesList = [];
+    if(files){
+        files.forEach(function(file){
+            let filename = file.fileName+"."+file.fileExtension;
+            existing(filename)
+        })
+    }
     document.getElementById('drop-area').addEventListener('drop', function(e) {
         e.preventDefault();
         e.stopPropagation();
@@ -102,7 +112,6 @@
             }
             fileNames.push(file.name);
             filesList.push(file);
-            console.log("Add", fileNames, ":", filesList)
             //이미지 div태그
             let imgWrap = document.createElement("div");
             imgWrap.classList.add("userPictureWrap");
@@ -121,7 +130,6 @@
                 if (index > -1) {
                     fileNames.splice(index, 1);
                     filesList.splice(index, 1);
-
                 }
             };
             //이미지 div에 이미지와 취소버튼 추가
@@ -137,20 +145,48 @@
             reader.readAsDataURL(file);
         }
     }
-
     document.getElementById('drop-area').addEventListener('dragover', function(e) {
         e.preventDefault();
         e.stopPropagation();
     });
+    function existing(file) {
+        //이미지 div태그
+        let imgWrap = document.createElement("div");
+        imgWrap.classList.add("userPictureWrap");
+        //파일 img태그
+        let img = document.createElement("img");
+        img.classList.add("userPicture");
+        img.src = "../../../resources/static/userFiles/"+file;
+        //이미지 취소 span태그
+        let deleteIcon = document.createElement("span");
+        deleteIcon.classList.add("deleteIcon");
+        deleteIcon.innerText = "X";
+        deleteIcon.onclick = function() {
+            //이미지 div 태그 삭제
+            imgWrap.remove();
+            deleteFile.push(file)
+            fileNumber -= 1;
+        };
+        //이미지 div에 이미지와 취소버튼 추가
+        imgWrap.appendChild(img);
+        imgWrap.appendChild(deleteIcon);
+        document.getElementById('drop-area').appendChild(imgWrap);
+    }
+
     document.getElementById("blogPost").addEventListener("submit", function (event){
         event.preventDefault();
-
         var formData = new FormData();
-
         var title = document.getElementById('title').value;
         var content = document.getElementById('content').value;
         var nickName = document.getElementById('nickName').value;
         var category = document.getElementById('selector').value;
+        var boardId = document.getElementById('boardId').value;
+        var isFile;
+        if(filesList.length===0 && fileNumber===0 ){
+            isFile = "F"
+        }else{
+            isFile = "T"
+        }
         if(filesList.length>0){
             filesList.forEach((file) => {
                 formData.append('fileData', file);
@@ -158,12 +194,19 @@
         }else{
             formData.append('fileData', null);
         }
+        if(deleteFile.length>0){
+            deleteFile.forEach((file)=>{
+                formData.append('deleteFile', file);
+            })
+        }
+        formData.append('isFile', isFile);
+        formData.append('id',boardId);
         formData.append('boardTitle', title);
         formData.append('boardContents', content);
         formData.append('boardWriter', nickName);
         formData.append('category', category);
 
-        fetch('/blog/postBlog', {
+        fetch('/blog/updateBlog', {
             method: 'POST',
             body: formData,
         }).then(response => {
@@ -181,11 +224,6 @@
             });
         });
     })
-
-
-
-
-
 </script>
 <style>
     #selector {

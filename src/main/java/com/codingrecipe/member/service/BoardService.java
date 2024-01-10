@@ -88,11 +88,10 @@ public class BoardService{
 
     public boolean deletePost(Integer boardId) {
         BoardDto boardDto = boardRepository.blogDetail(boardId);
-        if (boardDto.getIsFile()=='T'){
+        if (boardDto.getIsFile().equals("T")){
             try {
                 List<FilesDto> filesDtos = boardRepository.findFilesById(boardId);
                 if(!filesDtos.isEmpty()){
-                    System.out.println("dfsdfsd");
                     for (FilesDto filesDto : filesDtos){
                         String filePath = uploadPath+filesDto.getFileName()+"."+filesDto.getFileExtension();
                         File fileDelete = new File(filePath);
@@ -103,8 +102,20 @@ public class BoardService{
             }catch (Exception e){
                 System.out.println(e.getMessage());
             }
-
         }
         return boardRepository.deletePost(boardId) > 0;
+    }
+    public void deleteOnlyFile(String fileName){
+        int dot = fileName.indexOf(".");
+        String file;
+        if(dot!=-1){
+            file = fileName.substring(0, dot);
+            boardRepository.findFilesByFileName(file);
+        }else {
+            boardRepository.findFilesByFileName(fileName);
+        }
+    }
+    public int updateBlog(BoardDto boardDto) {
+        return boardRepository.updateBlog(boardDto);
     }
 }

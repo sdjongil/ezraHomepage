@@ -70,4 +70,12 @@ public class BoardRepository{
     public int deleteFiles(Integer boardId) {
         return sql.delete("File.deleteFiles", boardId);
     }
+
+    public int updateBlog(BoardDto boardDto) {
+        return sql.update("Board.updateBlog", boardDto);
+    }
+
+    public void findFilesByFileName(String fileName) {
+        sql.delete("File.deleteFileByFileName", fileName);
+    }
 }
