@@ -1,6 +1,7 @@
 package com.codingrecipe.member.controller;
 
 import com.codingrecipe.member.dto.InquiriesDto;
+import com.codingrecipe.member.dto.MemberDto;
 import com.codingrecipe.member.dto.ProductsDto;
 import com.codingrecipe.member.service.InquiriesService;
 import com.codingrecipe.member.service.ProductService;
@@ -28,7 +29,16 @@ public class ProductController {
     public String findAll(Model model, @CookieValue(name = "ezraToken", required = false) String token){
         List<ProductsDto> productsDtoList = productService.findAll();
         model.addAttribute("productsList", productsDtoList);
-        return "products/index";
+        return "productsViews/products";
+    }
+    @GetMapping("/campus")
+    public String campus(){
+        return "productsViews/campus";
+    }
+    @GetMapping("/volunteer")
+    public String volunteer(){
+
+        return "productsViews/volunteer";
     }
     @GetMapping
     public String productDetail(@RequestParam("id")Long id, Model model){

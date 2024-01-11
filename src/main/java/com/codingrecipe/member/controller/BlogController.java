@@ -162,44 +162,28 @@ public class BlogController {
     @PostMapping("/updateBlog")
     public ResponseEntity<?> updateBlog(@ModelAttribute BoardDto boardDto,
                                         @RequestParam(name = "deleteFile", required = false) String[] deleteFiles,
-                                        @RequestParam(name = "fileData", required = false) MultipartFile[] files){
-        //새로운 파일있으면
+                                        @RequestParam(name = "fileData", required = false) MultipartFile[] files)
+    {
+        int result = boardService.updateBlog(boardDto);
+        if (result==0){        //게시판 (파일제외) 테이블 등록 실패 시
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"status\": \"failure\", \"redirect\": \"/blog/writeBlog\"}");
+        }
+        //새로운 파일있을 시 저장
         if(files != null){
-            int result = boardService.updateBlog(boardDto);
-            if((result>0)){
-                int id = Math.toIntExact(boardDto.getId());
-                boardService.saveFile(files, id);
-                return ResponseEntity.ok().body("{\"status\": \"success\", \"redirect\": \"/blog/\"}");
-            }else{
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"status\": \"failure\", \"redirect\": \"/blog/writeBlog\"}");
-            }
-            //새로운 파일 없으면
-        }else {
-            //기존 파일 변경 없으면
-            if (deleteFiles ==null){
-                int result = boardService.updateBlog(boardDto);
-                if((result>0)){
-                    return ResponseEntity.ok().body("{\"status\": \"success\", \"redirect\": \"/blog/\"}");
-                }else {
-                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"status\": \"failure\", \"redirect\": \"/blog/writeBlog\"}");
-                }
-            //기본 파일 변경(삭제) 했으면
-            }else {
-                int result = boardService.updateBlog(boardDto);
-                if((result>0)){
-                    for (String file : deleteFiles){
-                        boardService.deleteOnlyFile(file);
-                        String uploadPath = "D:\\spring1226\\springWorkPlace\\src\\main\\webapp\\resources\\static\\userFiles\\";
-                        String filePath = uploadPath +file;
-                        File fileDelete = new File(filePath);
-                        fileDelete.delete();
-                    }
-                    return ResponseEntity.ok().body("{\"status\": \"success\", \"redirect\": \"/blog/\"}");
-                }else{
-                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"status\": \"failure\", \"redirect\": \"/blog/writeBlog\"}");
-                }
+            int id = Math.toIntExact(boardDto.getId());
+            boardService.saveFile(files, id);
+        }
+        //기존 파일 삭제했을 시 삭제
+        if (deleteFiles !=null){
+            for (String file : deleteFiles){
+                boardService.deleteOnlyFile(file);
+                String uploadPath = "D:\\spring1226\\springWorkPlace\\src\\main\\webapp\\resources\\static\\userFiles\\";
+                String filePath = uploadPath +file;
+                File fileDelete = new File(filePath);
+                fileDelete.delete();
             }
         }
+        return ResponseEntity.ok().body("{\"status\": \"success\", \"redirect\": \"/blog/\"}");
     }
 
 }

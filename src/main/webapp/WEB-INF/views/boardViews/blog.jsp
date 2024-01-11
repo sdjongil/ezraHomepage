@@ -48,30 +48,19 @@
         <div data-w-id="754fcd17-56b8-7a50-2cb2-605d67e10a21" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="wrap-filers">
             <div class="w-dyn-list">
                 <div class="optionBox" style="display: flex">
-                    <div id="orderBy" class="tag" style="cursor: pointer;"
-                         onclick="toggleOptions()">Order by</div>
+                    <div id="orderBy" class="tag" style="cursor: pointer;">Order by</div>
                     <div id="options"  style="display: none;">
-                        <div class="tag" style="cursor : pointer;" onclick="orderBy('time')">Time</div>
-                        <div class="tag" style="cursor : pointer;" onclick="orderBy('likes')">Likes</div>
-                        <div class="tag" style="cursor : pointer;" onclick="orderBy('views')">Views</div>
+                        <div class="tag" style="cursor : pointer;" on="orderBy('time')">Time</div>
+                        <div class="tag" style="cursor : pointer;" on="orderBy('likes')">Likes</div>
+                        <div class="tag" style="cursor : pointer;" on="orderBy('views')">Views</div>
                     </div>
-                    <div id="Sort" class="tag" style="cursor: pointer;"
-                         onclick="toggleSortOptions()">Sort</div>
+                    <div id="Sort" class="tag" style="cursor: pointer;">Sort</div>
                     <div id="SortOptions"  style="display: none;">
-                        <div class="tag" style="cursor : pointer;" onclick="sortBy('DESC')">DESC</div>
-                        <div class="tag" style="cursor : pointer;" onclick="sortBy('ASC')">ASC</div>
-                    </div>
-                    <div id="category" class="tag" style="cursor: pointer;"
-                         onclick="toggleCategoryOptions()">Category</div>
-                    <div id="categoryOptions"  style="display: none;">
-                        <div class="tag" style="cursor : pointer;" onclick="categoryBy('English Study')">English Study</div>
-                        <div class="tag" style="cursor : pointer;" onclick="categoryBy('Casual Talk')">Casual Talk</div>
-                        <div class="tag" style="cursor : pointer;" onclick="categoryBy('Tech Study')">Tech Study</div>
-                        <div class="tag" style="cursor : pointer;" onclick="categoryBy('Algorithms')">Algorithms</div>
-                        <div class="tag" style="cursor : pointer;" onclick="categoryBy('All')">All</div>
+                        <div class="tag" style="cursor : pointer;" on="sortBy('DESC')">DESC</div>
+                        <div class="tag" style="cursor : pointer;" on="sortBy('ASC')">ASC</div>
                     </div>
                     <div class="tag" id="searchButton" style="margin-left: auto; cursor:pointer;">
-                        Go Search
+                        Go
                     </div>
                 </div>
             </div>
@@ -83,7 +72,7 @@
                            placeholder="Search by title" id="name">
                 </div>
                 <div>
-                    <a href="#" class="cta w-button">Go</a>
+                    <a href="#" class="cta w-button">Search</a>
                 </div>
             </div>
         </div>
@@ -175,44 +164,10 @@
 <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=658e8233ef485db1d618da5a"
         type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath}/resources/static/js/webflow.js" type="text/javascript"></script>
-<script>
-    var orderSrot = document.getElementById("Sort");
-    var order = document.getElementById("orderBy");
-    var category = document.getElementById("category")
-
-
-    function toggleCategoryOptions(){
-        var categoryOptions = document.getElementById("categoryOptions");
-        categoryOptions.style.display = (categoryOptions.style.display === "none" ? "block" : "none")
-    }
-    function categoryBy(option) {
-        category.innerText = option;
-        document.getElementById("categoryOptions").style.display = "none";
-    }
-
-    function toggleSortOptions(){
-        var sortOptions = document.getElementById("SortOptions");
-        sortOptions.style.display = (sortOptions.style.display === "none" ? "block" : "none")
-    }
-    function sortBy(option) {
-        orderSrot.innerText = option;
-        document.getElementById("SortOptions").style.display = "none";
-    }
-
-    function toggleOptions() {
-        var options = document.getElementById("options");
-        options.style.display = (options.style.display === "none" ? "block" : "none");
-    }
-    function orderBy(option) {
-        order.innerText = option;
-        document.getElementById("options").style.display = "none";
-    }
-
-
-</script>
 <script type="module">
     import { PageDto } from "../../../resources/static/js/PageDto.js";
 
+    //페이징
     let pageDto;
     if(sessionStorage.getItem('pageDto')===null){
         fetch('/blog/blogTotal').then(response =>{
@@ -224,6 +179,7 @@
             pageDto = new PageDto(count)
             pageDto.calculatePageDto()
             createPagination(pageDto);
+            sessionStorage.setItem("pageDto", JSON.stringify(pageDto))
         }).catch(error=>{
             console.log("Fetch error : " + error);
         })
@@ -234,7 +190,6 @@
         Object.assign(pageDto, data); // 저장된 데이터를 pageDto 인스턴스에 복사
         createPagination(pageDto);
     }
-
     function createPagination(pageDto) {
         const paginationContainer = document.getElementById('pagination');
         addPageLink(paginationContainer, 1, true);
@@ -243,7 +198,6 @@
         }
         addPageLink(paginationContainer, pageDto.totalPage, true);
     }
-
     function addPageLink(container, pageNumber, isFirst) {
         const pageLink = document.createElement('a');
         pageLink.onclick=(event)=>{
@@ -266,7 +220,70 @@
         }
         container.appendChild(pageLink);
     }
-    console.log()
+
+    //옵션 토글 및 기능
+    var orderSrot = document.getElementById("Sort");
+    var order = document.getElementById("orderBy");
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', (event) => {
+                switch (tag.id) {
+                    case 'orderBy':
+                        toggleOptions();
+                        break;
+                    case 'Sort':
+                        toggleSortOptions();
+                        break;
+                }
+                if (tag.hasAttribute('on')) {
+                    event.preventDefault()
+                    const functionName = tag.getAttribute('on').split('(')[0];
+                    const parameter = tag.getAttribute('on').split('\'')[1];
+                    switch (functionName) {
+                        case 'orderBy':
+                            orderBy(parameter);
+                            break;
+                        case 'sortBy':
+                            sortBy(parameter);
+                            break;
+                    }
+                }
+            });
+        });
+        document.getElementById("searchButton").addEventListener('click', function (){
+            sessionStorage.setItem("pageDto", JSON.stringify(pageDto))
+            const href = "/blog/?startNo="+pageDto.startNo+"&endNo="+pageDto.endNo+"&perPageNum="+pageDto.perPageNum+
+                "&searchType="+pageDto.searchType+"&searchKeyword="+pageDto.searchKeyword+"&orderBy="+
+                pageDto.orderBy+"&order="+pageDto.order;
+            window.location.href = href;
+        })
+    });
+    function toggleOptions() {
+        var options = document.getElementById("options");
+        options.style.display = (options.style.display === "none" ? "block" : "none");
+    }
+    function toggleSortOptions(){
+        var sortOptions = document.getElementById("SortOptions");
+        sortOptions.style.display = (sortOptions.style.display === "none" ? "block" : "none")
+    }
+    function orderBy(option) {
+        order.innerText = option;
+        if(option === 'time'){
+            option = 'boardcreatedtime';
+        }else if(option === 'likes'){
+            option = 'boardHits'
+        }
+        pageDto.orderBy = option;
+        document.getElementById("options").style.display = "none";
+    }
+    function sortBy(option) {
+        orderSrot.innerText = option;
+        pageDto.order = option;
+        document.getElementById("SortOptions").style.display = "none";
+    }
+
+
+
 </script>
 
 </html>

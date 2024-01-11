@@ -15,4 +15,5 @@ public class MemberDto {
     private int memberAge;
     private String memberMobile;
     private String nickName;
+    private String profile;
 }

@@ -29,7 +29,7 @@
         -moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
         -ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
         transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-        opacity:0">My projects</h1>
+        opacity:0">My Blog</h1>
         <div class="right-contact-heading">
             <a href="/blog/projects" class="big-underline-link w-inline-block">
                 <div>Projects</div>
@@ -77,22 +77,27 @@
                     <p class="no-margins">${board.boardContents}</p>
                 </div>
                 <div style="display: flex; justify-content: space-between;">
-                    <div id="likesCount" style="display: flex;">Likes :
+                    <div id="likeIt" class="tag" style="width: 20%; cursor: pointer;
+                ${userAlreadyLiked ? 'background-color: darkgray;' : ''}"${userAlreadyLiked ? 'disabled' : ''}>Like
                         <div id="likeNum" style="display: flex;margin-left: 3px;">${board.boardHits}</div>
                     </div>
                     <div style="display: inline-block; text-align: center; flex-grow: 1;">Views : ${board.views}</div>
-                    <div data-board-writer="${board.boardWriter}" style="display: inline-block; text-align: right;">
-                        By : ${board.boardWriter}</div>
-
-                    <div data-board-id="${board.id}" style="display: none;">
-                        ${board.id}</div>
+                    <div data-board-writer="${board.boardWriter}" style="display: inline-block; text-align: right;"> By : ${board.boardWriter}</div>
+                    <div data-board-id="${board.id}" style="display: none;">${board.id}</div>
                 </div>
-
                 <div class="space-40 line-bottom"></div>
-                <div id="likeIt" class="tag" style="width: 20%; cursor: pointer;
-                ${userAlreadyLiked ? 'background-color: darkgray;' : ''}"
-                ${userAlreadyLiked ? 'disabled' : ''}>Like it</div>
-
+                <div id="bottomBlog">
+                    <div class="comment-container">
+                        <div class="user-image" style="width: 13%">
+                            <img src="../../../resources/static/images/ezra-image-home.jpg" alt="User Image">
+                        </div>
+                        <div style="width: 65%;">
+                            <textarea class="input-underline text-area comment-box" style="width: 100%;"
+                                      placeholder="Leave a comment..."></textarea>
+                        </div>
+                        <button class="cta big-submit w-button" style="width: 20%">Comment</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -102,11 +107,24 @@
 
 </body>
 <style>
-    .line-bottom{
-        border-bottom: 2px solid white;
-        height: 5px;
+    .comment-container {
+        display: flex;
+        padding: 10px;
     }
-    .line-top{
+
+    .user-image img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+
+    .comment-box {
+        flex-grow: 2;
+    }
+
+
+    .line-bottom{
         height: 1px;
         border-top: 2px solid white;
     }
@@ -115,6 +133,8 @@
         pointer-events: none; /* 클릭 이벤트를 무시하도록 설정 */
         cursor: default;
     }
+
+
 </style>
 <script src="${pageContext.request.contextPath}/resources/static/js/baseForm.js"></script>
 <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=658e8233ef485db1d618da5a"
