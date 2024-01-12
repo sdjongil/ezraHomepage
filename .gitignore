@@ -1,4 +1,4 @@
 # Project exclude paths
-/target/
-src/main/resources/application.yml
+#/target/
+application.yml
 src/main/webapp/WEB-INF/root-context.xml

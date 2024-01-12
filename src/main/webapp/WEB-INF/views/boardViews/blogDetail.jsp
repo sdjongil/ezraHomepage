@@ -5,10 +5,10 @@
 
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
 <!--  Last Published: Tue Jan 02 2024 07:44:22 GMT+0000 (Coordinated Universal Time)  -->
-<html data-wf-page="658e8234ef485db1d618dac1" data-wf-site="658e8233ef485db1d618da5a">
+<html data-wf-page="658e8234ef485db1d618dac1" data-wf-site="658e8233ef485db1d618da5a" lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Projects | Ezra Folio</title>
+    <title>Blog | Ezra Folio</title>
     <link href="${pageContext.request.contextPath}/resources/static/css/normalize.css" rel="stylesheet" type="text/css">
     <link href="${pageContext.request.contextPath}/resources/static/css/webflow.css" rel="stylesheet" type="text/css">
     <link href="${pageContext.request.contextPath}/resources/static/css/hans-wondrous-site-b14015.webflow.css" rel="stylesheet" type="text/css">
@@ -21,7 +21,10 @@
 </head>
 <body>
 <div id="navbar-container"></div>
-
+<div style="margin-left: 25px; margin-right: 25px">
+    <h3 style="font-size: 30px; color: #d39e00; line-height: 1.4;">
+        좋아요는 비동기로이루워지며 좋아요테이블을 통해 중복를 제어합니다.</h3>
+</div>
 <div id="top" class="section projects-a">
     <div class="main-container w-container">
         <h1 data-w-id="16cfbc97-3818-6f4c-23d0-e154a4034af6"
@@ -29,7 +32,7 @@
         -moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
         -ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
         transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-        opacity:0">My Blog</h1>
+        opacity:0">Study Blog</h1>
         <div class="right-contact-heading">
             <a href="/blog/projects" class="big-underline-link w-inline-block">
                 <div>Projects</div>
@@ -39,12 +42,6 @@
             </a>
             <a href="/blog/" class="big-underline-link w-inline-block">
                 <div>Study Blog</div>
-                <div class="underline-master">
-                    <div class="undeline-inside"></div>
-                </div>
-            </a>
-            <a href="/blog/drawing" class="big-underline-link w-inline-block">
-                <div>Drawing Board</div>
                 <div class="underline-master">
                     <div class="undeline-inside"></div>
                 </div>
@@ -59,7 +56,7 @@
             <div role="list" class="list-projects-b w-dyn-items">
                 <div role="listitem" class="w-dyn-item">
                     <div class="space-40 line-top"></div>
-                    <div class="top-wrap-project-b">
+                    <div class="top-wrap-project-b" style="border-bottom: solid white 2px">
                         <div class="text-block-heading-3-styles">${board.boardTitle}</div>
                         <div class="text-block-heading-3-styles servie-projects-b">
                             <fmt:formatDate value="${board.boardCreatedTime}" pattern="yy-MM-dd" />
@@ -84,20 +81,21 @@
                     <div style="display: inline-block; text-align: center; flex-grow: 1;">Views : ${board.views}</div>
                     <div data-board-writer="${board.boardWriter}" style="display: inline-block; text-align: right;"> By : ${board.boardWriter}</div>
                     <div data-board-id="${board.id}" style="display: none;">${board.id}</div>
+                    <div id="viewer" style="display: none">${nickName}</div>
                 </div>
                 <div class="space-40 line-bottom"></div>
-                <div id="bottomBlog">
-                    <div class="comment-container">
-                        <div class="user-image" style="width: 13%">
-                            <img src="../../../resources/static/images/ezra-image-home.jpg" alt="User Image">
-                        </div>
-                        <div style="width: 65%;">
-                            <textarea class="input-underline text-area comment-box" style="width: 100%;"
-                                      placeholder="Leave a comment..."></textarea>
-                        </div>
-                        <button class="cta big-submit w-button" style="width: 20%">Comment</button>
-                    </div>
-                </div>
+<%--                <div id="bottomBlog">--%>
+<%--                    <div class="comment-container">--%>
+<%--                        <div class="user-image" style="width: 13%">--%>
+<%--                            <img src="../../../resources/static/images/ezra-image-home.jpg" alt="User Image">--%>
+<%--                        </div>--%>
+<%--                        <div style="width: 65%;">--%>
+<%--                            <textarea class="input-underline text-area comment-box" style="width: 100%;"--%>
+<%--                                      placeholder="Leave a comment..."></textarea>--%>
+<%--                        </div>--%>
+<%--                        <button class="cta big-submit w-button" style="width: 20%">Comment</button>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
             </div>
         </div>
     </div>
@@ -130,7 +128,7 @@
     }
     .disabled {
         background-color: darkgray;
-        pointer-events: none; /* 클릭 이벤트를 무시하도록 설정 */
+        pointer-events: none;
         cursor: default;
     }
 
@@ -143,12 +141,16 @@
 <script>
     var boardWriter = document.querySelector('[data-board-writer]').getAttribute('data-board-writer');
     var boardId = document.querySelector('[data-board-id]').getAttribute('data-board-id');
+    var viewer = document.getElementById("viewer").textContent;
     document.getElementById('likeIt').addEventListener('click', function() {
+        if(viewer === 'anonymous'){
+            alert('Please login first');
+            return
+        }
         if (this.hasAttribute('disabled')) {
             alert('You already liked it.');
         } else {
-            this.classList.add('disabled');
-            fetch("/blog/updateLike?nick="+boardWriter+"&id="+boardId, {
+            fetch("/blog/updateLike?nick="+viewer+"&id="+boardId, {
                 method: 'GET'
             }).then(response => {
                 if (!response.ok) {
@@ -160,6 +162,7 @@
                     let likesCountElement = document.getElementById('likeNum');
                     let likesCount = parseInt(likesCountElement.textContent);
                     likesCountElement.textContent = likesCount + 1;
+                    this.classList.add('disabled');
                 }
             }).catch(error => {
                 console.error('Error:', error);

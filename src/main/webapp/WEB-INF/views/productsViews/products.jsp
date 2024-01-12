@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
 <!--  Last Published: Tue Jan 02 2024 07:44:22 GMT+0000 (Coordinated Universal Time)  -->
-<html data-wf-page="658e8234ef485db1d618dab2" data-wf-site="658e8233ef485db1d618da5a">
+<html data-wf-page="658e8234ef485db1d618dab2" data-wf-site="658e8233ef485db1d618da5a" lang="en">
 <head>
     <meta charset="utf-8">
     <title>Join | Ezra Folio</title>
@@ -18,6 +18,10 @@
 </head>
 <body>
 <div id="navbar-container"></div>
+<div style="margin-left: 25px; margin-right: 25px">
+    <h3 style="font-size: 30px; color: #d39e00; line-height: 1.4;">
+        이 페이지는 연습이 필요해 구현했지만 나를 알리는 블로그로서 저의 개발자 이외의 업적을 넣었습니다.</h3>
+</div>
 <div id="top" class="section">
     <div class="main-container w-container">
         <h1 data-w-id="023a4ddb-7d6d-549a-4046-d107cd1afb74" style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); opacity: 1; transform-style: preserve-3d;">Shop ezra's salary</h1>
@@ -42,7 +46,7 @@
                             </div>
                         </div>
                     </a>
-                </div>
+                </div> <!--봉사활동-->
                 <div role="listitem" class="w-dyn-item">
                     <a href="/product/campus" class="link-product w-inline-block">
                         <div class="image-wrap-product">
@@ -60,9 +64,9 @@
                             </div>
                         </div>
                     </a>
-                </div>
-                <div role="listitem" class="w-dyn-item">
-                    <a href="/product/my-icon-pack" class="link-product w-inline-block">
+                </div> <!--교내활동-->
+                <div role="listitem" class="w-dyn-item"> <!--학습활동-->
+                    <a href="/product/learning" class="link-product w-inline-block">
                         <div class="image-wrap-product">
                             <div style="background-image: url('../../../resources/static/images/ezra-image-learning1.jpg'); transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;" class="image-product">
                             </div>
@@ -78,9 +82,9 @@
                             </div>
                         </div>
                     </a>
-                </div>
+                </div> <!--학습활동-->
                 <div role="listitem" class="w-dyn-item">
-                    <a href="/product/my-icon-pack" class="link-product w-inline-block">
+                    <a href="/product/exploratory" class="link-product w-inline-block">
                         <div class="image-wrap-product">
                             <div style="background-image: url('../../../resources/static/images/ezra-image-exploratory.JPG'); transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;" class="image-product">
                             </div>
@@ -96,9 +100,9 @@
                             </div>
                         </div>
                     </a>
-                </div>
+                </div>  <!--탐구활동--->
                 <div role="listitem" class="w-dyn-item">
-                    <a href="/product/my-icon-pack" class="link-product w-inline-block">
+                    <a href="/product/social" class="link-product w-inline-block">
                         <div class="image-wrap-product">
                             <div style="background-image: url('../../../resources/static/images/ezra-image-social1.JPG'); transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;" class="image-product">
                             </div>

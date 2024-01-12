@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <!-- 자동으로 카멜케이스 규칙으로 변환 -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+    <typeAliases>
+        <typeAlias type="com.codingrecipe.member.dto.MemberDto" alias="member"/>
+        <typeAlias type="com.codingrecipe.member.dto.BoardDto" alias="board"/>
+        <typeAlias type="com.codingrecipe.member.dto.ProductsDto" alias="product"/>
+        <typeAlias type="com.codingrecipe.member.dto.InquiriesDto" alias="inquiry"/>
+        <typeAlias type="com.codingrecipe.member.dto.PageDto" alias="page"/>
+        <typeAlias type="com.codingrecipe.member.dto.FilesDto" alias="file"/>
+        <typeAlias type="com.codingrecipe.member.dto.ViewsDto" alias="Views"/>
+        <typeAlias type="com.codingrecipe.member.dto.LikesDto" alias="Likes"/>
+    </typeAliases>
+</configuration>
+

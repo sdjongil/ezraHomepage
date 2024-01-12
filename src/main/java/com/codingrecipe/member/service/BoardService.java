@@ -118,4 +118,13 @@ public class BoardService{
     public int updateBlog(BoardDto boardDto) {
         return boardRepository.updateBlog(boardDto);
     }
+
+    public void updateViews(Integer id) {
+        boardRepository.updateViews(id);
+    }
+
+    public List<BoardDto> searchByTitle(String title) {
+        title = "%"+title +"%";
+        return boardRepository.searchByTitle(title);
+    }
 }

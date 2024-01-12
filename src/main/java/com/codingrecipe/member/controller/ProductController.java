@@ -32,13 +32,20 @@ public class ProductController {
         return "productsViews/products";
     }
     @GetMapping("/campus")
-    public String campus(){
-        return "productsViews/campus";
-    }
+    public String campus(){return "productsViews/campus";}
     @GetMapping("/volunteer")
-    public String volunteer(){
-
-        return "productsViews/volunteer";
+    public String volunteer(){return "productsViews/volunteer";}
+    @GetMapping("/learning")
+    public String learning(){
+        return "productsViews/learning";
+    }
+    @GetMapping("/exploratory")
+    public String exploratory(){
+        return "productsViews/exploratory";
+    }
+    @GetMapping("/social")
+    public String social(){
+        return "productsViews/social";
     }
     @GetMapping
     public String productDetail(@RequestParam("id")Long id, Model model){

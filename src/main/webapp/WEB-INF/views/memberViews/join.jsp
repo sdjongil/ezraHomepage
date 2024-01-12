@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<html data-wf-page="658e8234ef485db1d618dab2" data-wf-site="658e8233ef485db1d618da5a">
+<html data-wf-page="658e8234ef485db1d618dab2" data-wf-site="658e8233ef485db1d618da5a" lang="en">
 <head>
     <meta charset="utf-8">
     <title>Join | Ezra Folio</title>
@@ -17,7 +17,11 @@
 </head>
 <body>
 <div id="navbar-container"></div>
-
+<div style="margin-left: 25px; margin-right: 25px">
+    <h3 style="font-size: 30px; color: #d39e00; line-height: 1.4;">
+        자바스크립트로 정규식을 사용하였고, 비동기 통신을 통해 중복검사 등을 실시하며 이 것들에 반할 경우
+    경고문을 띄우도록 코딩했습니다.<br>빠른 로그인을 원한다면 guest@naver.com/123123123a로 로그인해보세요!</h3>
+</div>
 <div id="top" class="section">
     <div class="main-container w-container">
         <div class="heading-wrap-contact">

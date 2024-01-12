@@ -78,4 +78,12 @@ public class BoardRepository{
     public void findFilesByFileName(String fileName) {
         sql.delete("File.deleteFileByFileName", fileName);
     }
+
+    public void updateViews(Integer id) {
+        sql.update("Board.increaseView", id);
+    }
+
+    public List<BoardDto> searchByTitle(String title) {
+        return sql.selectList("Board.searchByTitle", title);
+    }
 }

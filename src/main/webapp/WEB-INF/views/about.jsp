@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
 <!--  Last Published: Fri Dec 29 2023 08:27:37 GMT+0000 (Coordinated Universal Time)  -->
-<html data-wf-page="658e8234ef485db1d618daad" data-wf-site="658e8233ef485db1d618da5a">
+<html data-wf-page="658e8234ef485db1d618daad" data-wf-site="658e8233ef485db1d618da5a" lang="en">
 <head>
     <meta charset="utf-8">
     <title>Projects | Ezra Folio</title>
@@ -17,7 +17,10 @@
 </head>
 <body>
 <div id="navbar-container"></div>
-
+<div style="margin-left: 25px; margin-right: 25px">
+    <h3 style="font-size: 30px; color: #d39e00; line-height: 1.4;">
+        저의 개발자에 대한 열정과 간단한 QnA가 있는 페이지입니다.</h3>
+</div>
 <div id="top" class="section hero-about-a">
     <div class="main-container w-container">
         <div class="heading-wrap-about-a">

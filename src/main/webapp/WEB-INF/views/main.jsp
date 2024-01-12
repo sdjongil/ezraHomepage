@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
 <!--  Last Published: Fri Dec 29 2023 08:27:37 GMT+0000 (Coordinated Universal Time)  -->
-<html data-wf-page="658e8234ef485db1d618daba" data-wf-site="658e8233ef485db1d618da5a">
+<html data-wf-page="658e8234ef485db1d618daba" data-wf-site="658e8233ef485db1d618da5a" lang="en">
 <head>
     <meta charset="utf-8">
     <title>Home | Ezra portflio</title>
@@ -20,7 +20,10 @@
 </head>
 <body>
 <div id="navbar-container"></div>
-
+<div style="margin-left: 25px; margin-right: 25px">
+    <h3 style="font-size: 30px; color: #d39e00; line-height: 1.4;">
+        저를 알리고 소통하기 위한 웹사이트입니다. css는 기존 템플릿을 수정하여 사용하였습니다. 메인에는 간단한 인사말로 이루워져있습니다. </h3>
+</div>
 <div id="top" class="section hero-home-a">
     <div class="main-container w-container">
         <h1 style="font-size: 66px;margin-bottom: 20px" id="userId" data-w-id="1b624307-1d06-ef67-6ffe-f2316f1d6c09" class="mega-h1 hero-a-one">

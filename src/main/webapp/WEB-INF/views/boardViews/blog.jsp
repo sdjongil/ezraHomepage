@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
 <!--  Last Published: Fri Dec 29 2023 08:27:37 GMT+0000 (Coordinated Universal Time)  -->
-<html data-wf-page="658e8234ef485db1d618dac1" data-wf-site="658e8233ef485db1d618da5a">
+<html data-wf-page="658e8234ef485db1d618dac1" data-wf-site="658e8233ef485db1d618da5a" lang="en">
 <head>
     <meta charset="utf-8">
     <title>Blog | Ezra Folio</title>
@@ -19,11 +19,17 @@
 </head>
 <body>
 <div id="navbar-container"></div>
-
+<div style="margin-left: 25px; margin-right: 25px">
+    <h3 style="font-size: 30px; color: #d39e00; line-height: 1.4;">
+        제가 배운 기술을 정리하고, 기록으로 남기는 공간입니다. 페이징에 대한 정보는 클라이언트 세션에 저장합니다.
+     정렬, 검색 기능이있습니다.</h3>
+</div>
 <div id="top" class="section projects-a">
     <div class="main-container w-container">
         <h1 data-w-id="16cfbc97-3818-6f4c-23d0-e154a4034af6" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0">
-            You can post it if you are sign in</h1>
+            Study Blog</h1>
+        <h3 data-w-id="16cfbc97-3818-6f4c-23d0-e154a4034af6" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0">
+            You can post it if you are sign in</h3>
         <div class="right-contact-heading">
             <a href="/blog/projects" class="big-underline-link w-inline-block">
                 <div>Projects</div>
@@ -37,17 +43,14 @@
                     <div class="undeline-inside"></div>
                 </div>
             </a>
-            <a href="/blog/drawing" class="big-underline-link w-inline-block">
-                <div>Drawing Board</div>
-                <div class="underline-master">
-                    <div class="undeline-inside"></div>
-                </div>
-            </a>
         </div>
         <div class="space-40"></div>
         <div data-w-id="754fcd17-56b8-7a50-2cb2-605d67e10a21" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="wrap-filers">
             <div class="w-dyn-list">
                 <div class="optionBox" style="display: flex">
+                    <div>
+                        Sort
+                    </div>
                     <div id="orderBy" class="tag" style="cursor: pointer;">Order by</div>
                     <div id="options"  style="display: none;">
                         <div class="tag" style="cursor : pointer;" on="orderBy('time')">Time</div>
@@ -68,11 +71,11 @@
         <div class="optionBox" style="margin-top: 15px;">
             <div style="margin-left: auto;">
                 <div>
-                    <input type="text" class="input-underline" name="name" style="height: 50px; font-size: 25px; margin-bottom: 12px;"
-                           placeholder="Search by title" id="name">
+                    <input id="searchTitle" type="text" class="input-underline" name="title" style="height: 50px; font-size: 25px; margin-bottom: 12px;"
+                           placeholder="Search by title">
                 </div>
                 <div>
-                    <a href="#" class="cta w-button">Search</a>
+                    <a id="searchTitleButton" href="#" class="cta w-button">Search</a>
                 </div>
             </div>
         </div>
@@ -164,6 +167,13 @@
 <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=658e8233ef485db1d618da5a"
         type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath}/resources/static/js/webflow.js" type="text/javascript"></script>
+<script>
+    document.getElementById("searchTitleButton").addEventListener("click", function (){
+        let searchTitle = document.getElementById("searchTitle").value;
+        console.log(searchTitle)
+        window.location.href = "/blog/searchByTitle?title="+searchTitle;
+    })
+</script>
 <script type="module">
     import { PageDto } from "../../../resources/static/js/PageDto.js";
 
@@ -281,9 +291,6 @@
         pageDto.order = option;
         document.getElementById("SortOptions").style.display = "none";
     }
-
-
-
 </script>
 
 </html>

@@ -1,3 +1,14 @@
 jwt:
   secret: dlrjt5.zmflt.5431
-
+#spring:
+#  mail:
+#    host: smtp.gmail.com
+#    port: 587
+#    username: sdjongil@gmail.com
+#    password: jjou aftb hpgq qrwh
+#    properties:
+#      mail:
+#        smtp:
+#          auth: true
+#          starttls:
+#            enable: true

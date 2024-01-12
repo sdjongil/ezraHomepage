@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
 <!--  Last Published: Tue Jan 02 2024 07:44:22 GMT+0000 (Coordinated Universal Time)  -->
-<html data-wf-page="658e8234ef485db1d618dab2" data-wf-site="658e8233ef485db1d618da5a">
+<html data-wf-page="658e8234ef485db1d618dab2" data-wf-site="658e8233ef485db1d618da5a" lang="en">
 <head>
     <meta charset="utf-8">
     <title>Join | Ezra Folio</title>
@@ -18,7 +18,10 @@
 </head>
 <body>
 <div id="navbar-container"></div>
-
+<div style="margin-left: 25px; margin-right: 25px">
+    <h3 style="font-size: 30px; color: #d39e00; line-height: 1.4;">
+        로그인 시 JWT로 변환된 토큰이 쿠키로(만료 1시간) 날라옵니다. 쿠키파싱을 통해 글쓰기, 수정, 좋아요등을 제어합니다.</h3>
+</div>
 <div id="top" class="section">
     <div class="main-container w-container">
         <div class="heading-wrap-contact">

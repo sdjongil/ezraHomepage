@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
 <!--  Last Published: Fri Dec 29 2023 08:27:37 GMT+0000 (Coordinated Universal Time)  -->
-<html data-wf-page="658e8234ef485db1d618dac1" data-wf-site="658e8233ef485db1d618da5a">
+<html data-wf-page="658e8234ef485db1d618dac1" data-wf-site="658e8233ef485db1d618da5a" lang="en">
 <head>
     <meta charset="utf-8">
     <title>Blog | Ezra Folio</title>
@@ -18,7 +18,12 @@
 </head>
 <body>
 <div id="navbar-container"></div>
-
+<div style="margin-left: 25px; margin-right: 25px">
+    <h3 style="font-size: 30px; color: #d39e00; line-height: 1.4;">
+        파일 업로드는 이미지만 가능하며, 내용부분에 드래그앤드롭으로 업로드와 삭제가 가능하도록하였습니다.
+        글쓴이는 토큰파싱을 통해 얻어진 정보로 이루워집니다.
+    </h3>
+</div>
 <div id="top" class="section projects-a">
     <div class="main-container w-container">
         <h1 data-w-id="16cfbc97-3818-6f4c-23d0-e154a4034af6" style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0">
@@ -34,12 +39,6 @@
             </a>
             <a href="/blog/" class="big-underline-link w-inline-block">
                 <div>Study Blog</div>
-                <div class="underline-master">
-                    <div class="undeline-inside"></div>
-                </div>
-            </a>
-            <a href="/blog/drawing" class="big-underline-link w-inline-block">
-                <div>Drawing Board</div>
                 <div class="underline-master">
                     <div class="undeline-inside"></div>
                 </div>

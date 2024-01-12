@@ -98,10 +98,24 @@ public class BlogController {
     }
 
     @GetMapping("/detail")
-    public String blogDetail(@RequestParam(value = "id") Integer id, Model model){
+    public String blogDetail(@RequestParam(value = "id") Integer id, Model model,
+                             @CookieValue(name = "auth_token", required = false) String logInToken){
+        //----------------------------------------------------
+        String nickname = "anonymous";
+        if(logInToken == null || logInToken.isEmpty()){
+            model.addAttribute("nickName", nickname);
+        }else{
+            try{
+                nickname = JwtUtil.parsingJwt(logInToken, secretKey);
+                model.addAttribute("nickName", nickname);
+            }catch (Exception e){
+                log.error(String.valueOf(e));
+            }
+        }
+        boardService.updateViews(id);
         BoardDto boardDto = boardService.blogDetail(id);
         LikesDto likesDto = new LikesDto();
-        likesDto.setMemberNickname(boardDto.getBoardWriter());
+        likesDto.setMemberNickname(nickname);
         likesDto.setBoardId(id);
         boolean userAlreadyLiked = boardService.findLike(likesDto);
         if (boardDto.getIsFile().equals("T")) {
@@ -184,6 +198,12 @@ public class BlogController {
             }
         }
         return ResponseEntity.ok().body("{\"status\": \"success\", \"redirect\": \"/blog/\"}");
+    }
+    @GetMapping("/searchByTitle")
+    public String searchByTitle(@RequestParam(name = "title")String title, Model model){
+        List<BoardDto> boardDtos = boardService.searchByTitle(title);
+        model.addAttribute("boardList", boardDtos);
+        return "boardViews/blog";
     }
 
 }
