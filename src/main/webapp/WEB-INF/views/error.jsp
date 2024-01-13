@@ -22,31 +22,14 @@
 <div id="navbar-container"></div>
 <div style="margin-left: 25px; margin-right: 25px">
     <h3 style="font-size: 30px; color: #d39e00; line-height: 1.4;">
-        SMTP프로토콜을 기반으로 이메일 전송 서비스를 구현한 페이지입니다.</h3>
+        에러나 오류가 생겼을 시 이동하는 페이지입니다.</h3>
 </div>
-<div id="top" class="section">
-    <div class="main-container w-container">
-        <div class="heading-wrap-contact">
-            <div class="left-contact-heading">
-                <h1 class="heading-contact">Let’s talk about our next project</h1>
-            </div><img src="${pageContext.request.contextPath}/resources/static/images/Arrow-Down-Layla-Portfolio-Template.svg" loading="lazy" alt="" class="arrow-contact">
-        </div>
-        <div class="space-120 contact-space"></div>
-        <div class="columns-contact w-row">
-            <div class="w-col w-col-2"></div>
-            <div class="column-contact-form w-col w-col-6">
-                <div class="w-form">
-                    <form action="/sendMail"  id="email-form" name="email-form" data-name="Email Form" method="post" data-wf-page-id="658e8234ef485db1d618dab2" data-wf-element-id="1775c4e6-6e5f-2b37-eb4a-985072fd0405">
-                        <input type="text" class="input-underline w-input" maxlength="256" name="name" data-name="name" placeholder="Name" id="name">
-                        <input type="email" class="input-underline w-input" maxlength="256" name="email" data-name="email" placeholder="Email" id="Email">
-                        <input type="text" class="input-underline w-input" maxlength="256" name="company" data-name="company" placeholder="Company" id="Company">
-                        <textarea placeholder="Message" maxlength="5000" id="Message" name="message" data-name="message" class="input-underline text-area w-input"></textarea>
-                        <input type="submit" value="Submit" data-wait="Please wait..." class="cta big-submit w-button">
-                    </form>
-                </div>
-            </div>
-            <div class="w-col w-col-4"></div>
-        </div>
+<div class="utility-page-wrap">
+    <div class="forgot-password-content">
+        <h1>Network error</h1>
+        <div class="big-text">Please try again</div>
+        <div class="space-40"></div>
+        <a href="/" class="cta w-button">Back to homepage</a>
     </div>
 </div>
 

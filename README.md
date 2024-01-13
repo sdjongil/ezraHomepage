@@ -3,3 +3,4 @@
 - DB: oracle
 - mybatis
 - view: JSP
+- developer : 한예종

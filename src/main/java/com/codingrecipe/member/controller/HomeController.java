@@ -51,9 +51,11 @@ public class HomeController {
 
     @PostMapping("/sendMail")
     public String sendMail(@ModelAttribute MailDto mailDto){
-        System.out.println(mailDto.toString());
-        mailService.send(mailDto);
-        return "";
+        if(mailService.send(mailDto)){
+            return "thankYou";
+        }else {
+            return "error";
+        }
     }
 
 }

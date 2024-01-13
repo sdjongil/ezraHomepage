@@ -43,12 +43,14 @@
       <version>${org.springframework-version}</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/com.sun.mail/javax.mail -->
+    <!-- https://mvnrepository.com/artifact/com.sun.mail/javax.mail
+    이메일 관련-->
     <dependency>
       <groupId>com.sun.mail</groupId>
       <artifactId>javax.mail</artifactId>
       <version>1.6.2</version>
     </dependency>
+    <!--이메일 빈생성(root-context)에 필요한 라이브러리 -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context-support</artifactId>

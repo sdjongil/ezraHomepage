@@ -14,17 +14,20 @@ import java.util.Map;
 public class MailService {
     private final JavaMailSender mailSender;
 
-    public Map<String, Object> send(MailDto mailDto){
+    public boolean send(MailDto mailDto){
+        boolean sendOk = false;
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
         try {
             helper.setTo("sdjongil@naver.com");
-            helper.setSubject(mailDto.getEmail());
-            helper.setText(mailDto.getMessage(), true); // true를 설정하면 HTML을 사용할 수 있음
+            helper.setSubject("name : "+mailDto.getName()+"/ company : "+mailDto.getCompany());
+            helper.setText("reply : "+mailDto.getEmail()+
+                    "/ content : "+mailDto.getMessage(), false); // true를 설정하면 HTML을 사용할 수 있음
+            mailSender.send(mimeMessage);
+            sendOk = true;
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
-        mailSender.send(mimeMessage);
-        return null;
+        return sendOk;
     };
 }

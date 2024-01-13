@@ -20,7 +20,8 @@
 <div id="navbar-container"></div>
 <div style="margin-left: 25px; margin-right: 25px">
     <h3 style="font-size: 30px; color: #d39e00; line-height: 1.4;">
-        이 페이지는 연습이 필요해 구현했지만 나를 알리는 블로그로서 저의 개발자 이외의 업적을 넣었습니다.</h3>
+        샵 페이지는 나를 알리는 블로그로서 저의 개발자 이외의 업적을 상품으로 넣어봤습니다.
+    콘텐츠 블록 형식으로 테이블을 구성하였습니다.</h3>
 </div>
 <div id="top" class="section">
     <div class="main-container w-container">
