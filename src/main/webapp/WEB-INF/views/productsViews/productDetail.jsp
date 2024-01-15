@@ -1,4 +1,7 @@
+<%@ page import="com.codingrecipe.member.dto.ContentBlocksDto" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
 <!--  Last Published: Tue Jan 02 2024 07:44:22 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="658e8234ef485db1d618dab2" data-wf-site="658e8233ef485db1d618da5a" lang="en">
@@ -19,14 +22,18 @@
 <body>
 <div id="navbar-container"></div>
 
-
+<div style="margin-left: 25px; margin-right: 25px">
+    <h3 style="font-size: 30px; color: #d39e00; line-height: 1.4;">
+        제품 상세 페이지입니다.
+        콘텐츠 블록 형식으로 테이블을 구성하였습니다.</h3>
+</div>
 <div id="top" class="section">
     <div class="main-container w-container">
         <div class="center-text">
             <div class="center-content">
                 <div class="master-product-page">
-                    <h1>Volunteer activity</h1>
-                    <div class="big-text">Person who stand up for the common good</div>
+                    <h1>${productsDto.name}</h1>
+                    <div class="big-text">${productsDto.description}</div>
                     <div class="space-64"></div>
                     <div class="master-product-purchase">
                         <div class="add-to-cart">
@@ -47,19 +54,18 @@
                     </div>
                     <div class="space-64"></div>
                     <div class="master-product-visuals">
-                        <h3> One of my favorite things is "collaboration".
-                            It's more rewarding to accomplish something together than it is to do it alone.
-                            I believe this is the source of human technological progress.</h3>
-                        <div style="background-image:url('../../../resources/static/images/ezra-image-Campus1.jpg')" class="image-wrap-product-main-image"></div>
+                        <c:forEach var="contentBlock" items="${contents}">
+                            <c:if test = "${contentBlock.blockType == 'text'}">
+                                <h3>${contentBlock.content}</h3>
+                            </c:if >
+                            <c:if test = "${contentBlock.blockType == 'image'}">
+                                <div style="background-image:url('../../../resources/static/images/${contentBlock.content}')" class="image-wrap-product-main-image"></div>
+                            </c:if >
+                        </c:forEach>
 
-                        <h3> So, I feel happy when I help members to do something together</h3>
-                        <div>
-                            <div style="background-image:url('../../../resources/static/images/ezra-image-campus2.jpg')" class="image-wrap-product-main-image"></div>
-                        </div>
-                        <h3>This my personality allowed me to go to school as an student Council.</h3>
                     </div>
                 </div>
-                <h1> Guess my salary. It's purely up to you.</h1>
+                <div class="space-40"></div>
             </div>
         </div>
     </div>

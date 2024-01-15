@@ -73,7 +73,7 @@
                 </a>
                 <a data-w-tab="Tab 2" class="tab-link w-inline-block w-tab-link">
                     <div class="tab-circle"></div>
-                    <div class="text-tab-link">What's a challenging experience you've had on a team project?</div>
+                    <div class="text-tab-link">In five years, what kind of developer do you aspire to be?</div>
                 </a>
                 <a data-w-tab="Tab 3" class="tab-link w-inline-block w-tab-link">
                     <div class="tab-circle"></div>
@@ -117,33 +117,24 @@
                 <div data-w-tab="Tab 2" class="w-tab-pane">
                     <div class="wrap-tab-content">
                         <div class="wrap-tags">
-                            <div class="tag">
-                                <div>Quantitative</div>
-                            </div>
-                            <div class="tag">
-                                <div>Qualitative</div>
-                            </div>
+
                         </div>
                         <p>
-                            The first time I worked on a team project, the hardest part was planning before we started.
-                            We didn't all know what we needed to do.
-                            However, when things didn't go as planned, we were able to share and discuss with each other.
-                            It was more efficient than working alone.
+                            In five years, I aspire to be a developer who consistently improves their English proficiency,
+                            enabling me to share and exchange a variety of opinions with more developers. Additionally,
+                            I aim to deeply study the flow of the web and, based on that knowledge, take on leadership
+                            roles in apps, games, etc. I also have an interest in participating in large-scale
+                            website projects.
                         </p>
                     </div>
                 </div>
                 <div data-w-tab="Tab 3" class="w-tab-pane">
                     <div class="wrap-tab-content">
                         <div class="wrap-tags">
-                            <div class="tag">
-                                <div>Wireframes</div>
-                            </div>
-                            <div class="tag">
-                                <div>Figma designs</div>
-                            </div>
                         </div>
-                        <p>When I have to use a new technology, I use YouTube to get a general knowledge of the technology  before that.
-                            I don't watch every single thing, Just when I'm driving, doing housework, etc.
+                        <p>When I have to use a new technology,
+                            I use YouTube to get a general knowledge of the technology  before that.
+                            I don't watch every detail single thing, Just when I'm driving, doing housework, etc.
                             I watch the whole thing over and over again 2-3 times.
                             Then, when I actually have to use it, I learn it in detail.
                             From this point on, I read books than YouTube.
@@ -154,15 +145,7 @@
                 <div data-w-tab="Tab 4" class="w-tab-pane">
                     <div class="wrap-tab-content">
                         <div class="wrap-tags">
-                            <div class="tag">
-                                <div>Audits</div>
-                            </div>
-                            <div class="tag">
-                                <div>Brand strategy</div>
-                            </div>
-                            <div class="tag">
-                                <div>UX Workshops</div>
-                            </div>
+
                         </div>
                         <p>The best company for me is one where I can "learn".
                             Especially in the first year or two, I still don't know what kind of developer I want to be.
@@ -188,51 +171,8 @@
                 - Robert C. Martin</h2>
             <div class="space-100 gallery-heading-space"></div>
             <div class="columns-gallery w-row">
-                <div class="column-left-gallery w-col w-col-6">
 
-                    <div class="lightbox-gallery w-inline-block w-lightbox">
-                        <div class="image-wrap-gallery">
-                            <img src="../../resources/static/images/ezra-image-about2.jpg" loading="lazy" sizes="(max-width: 479px) 93vw, (max-width: 767px) 94vw, 46vw"
-                                 srcset="../../resources/static/images/ezra-image-about2.jpg 500w,
-                                 ../../resources/static/images/ezra-image-about2.jpg 800w,
-                                 ../../resources/static/images/ezra-image-about2.jpg 1046w" alt="" class="image-gallery">
-                            <div class="overlay-gallery"></div>
-                        </div>
-                    </div>
-                    <div class="lightbox-gallery w-inline-block w-lightbox">
-                        <div class="image-wrap-gallery">
-                            <img src="../../resources/static/images/ezra-image-about5.JPG" loading="lazy" sizes="(max-width: 479px) 93vw, (max-width: 767px) 94vw, 46vw"
-                                 srcset="../../resources/static/images/ezra-image-about5.JPG 500w,
-                                 ../../resources/static/images/ezra-image-about5.JPG 800w,
-                                 ../../resources/static/images/ezra-image-about5.JPG 1046w" alt="" class="image-gallery">
-                            <div class="overlay-gallery"></div>
-                        </div>
-                    </div>
 
-                </div>
-                <div class="column-right-gallery w-col w-col-6">
-                    <div href="#" class="lightbox-gallery w-inline-block w-lightbox">
-                        <div class="image-wrap-gallery">
-                            <img src="../../resources/static/images/ezra-image-about3.jpg" loading="lazy"
-                                 sizes="(max-width: 479px) 93vw, (max-width: 767px) 94vw, 46vw"
-                                 srcset="../../resources/static/images/ezra-image-about3.jpg 500w,
-                                 ../../resources/static/images/ezra-image-about3.jpg 800w,
-                                 ../../resources/static/images/ezra-image-about3.jpg 1046w" alt="" class="image-gallery">
-                            <div class="overlay-gallery"></div>
-                        </div>
-                    </div>
-                    <div href="#" class="lightbox-gallery w-inline-block w-lightbox">
-                        <div class="image-wrap-gallery">
-                            <img src="../../resources/static/images/ezra-image-about4.jpeg" loading="lazy"
-                                 sizes="(max-width: 479px) 93vw, (max-width: 767px) 94vw, 46vw"
-                                 srcset="../../resources/static/images/ezra-image-about4.jpeg 500w,
-                                 ../../resources/static/images/ezra-image-about4.jpeg 800w,
-                                 ../../resources/static/images/ezra-image-about4.jpeg 1046w" alt="" class="image-gallery">
-                            <div class="overlay-gallery"></div>
-                        </div>
-                    </div>
-
-                </div>
             </div>
         </div>
     </div>

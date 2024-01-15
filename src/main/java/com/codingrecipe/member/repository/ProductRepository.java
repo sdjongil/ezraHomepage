@@ -1,5 +1,6 @@
 package com.codingrecipe.member.repository;
 
+import com.codingrecipe.member.dto.ContentBlocksDto;
 import com.codingrecipe.member.dto.ProductsDto;
 import lombok.RequiredArgsConstructor;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -12,12 +13,16 @@ import java.util.List;
 public class ProductRepository{
     public final SqlSessionTemplate sql;
     public List<ProductsDto> findAll() {
-        List<ProductsDto> productsDtoList = sql.selectList("Products.findAll");
         return sql.selectList("Products.findAll");
     }
 
-    public ProductsDto findById(Long id) {
-        return sql.selectOne("Products.findById", id);
+    public List<ContentBlocksDto> findById(Integer id) {
+        return sql.selectList("Products.findById", id);
     }
 
+
+    public ProductsDto findDetail(Integer id) {
+        return sql.selectOne("Products.findDetail", id);
+
+    }
 }

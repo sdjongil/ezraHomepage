@@ -22,7 +22,9 @@
 <div id="navbar-container"></div>
 <div style="margin-left: 25px; margin-right: 25px">
     <h3 style="font-size: 30px; color: #d39e00; line-height: 1.4;">
-        저를 알리고 소통하기 위한 웹사이트입니다. css는 기존 템플릿을 수정하여 사용하였습니다. 메인에는 간단한 인사말로 이루워져있습니다. </h3>
+        저를 알리고 소통하기 위한 웹사이트입니다.
+        어느 디바이스에서도 원할한 UI를 위해 반응형 웹으로 기존의 템플릿을 수정하여 사용하였습니다.
+        메인에는 간단한 인사말로 이루워져있습니다. </h3>
 </div>
 <div id="top" class="section hero-home-a">
     <div class="main-container w-container">

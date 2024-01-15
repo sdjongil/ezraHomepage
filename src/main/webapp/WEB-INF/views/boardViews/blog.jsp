@@ -170,7 +170,6 @@
 <script>
     document.getElementById("searchTitleButton").addEventListener("click", function (){
         let searchTitle = document.getElementById("searchTitle").value;
-        console.log(searchTitle)
         window.location.href = "/blog/searchByTitle?title="+searchTitle;
     })
 </script>

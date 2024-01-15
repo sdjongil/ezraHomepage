@@ -1,5 +1,6 @@
 package com.codingrecipe.member.controller;
 
+import com.codingrecipe.member.dto.ContentBlocksDto;
 import com.codingrecipe.member.dto.InquiriesDto;
 import com.codingrecipe.member.dto.MemberDto;
 import com.codingrecipe.member.dto.ProductsDto;
@@ -26,54 +27,39 @@ public class ProductController {
 
 
     @GetMapping("/")
-    public String findAll(Model model, @CookieValue(name = "ezraToken", required = false) String token){
+    public String findAll(Model model){
         List<ProductsDto> productsDtoList = productService.findAll();
         model.addAttribute("productsList", productsDtoList);
         return "productsViews/products";
     }
-    @GetMapping("/campus")
-    public String campus(){return "productsViews/campus";}
-    @GetMapping("/volunteer")
-    public String volunteer(){return "productsViews/volunteer";}
-    @GetMapping("/learning")
-    public String learning(){
-        return "productsViews/learning";
+    @GetMapping("/productDetail")
+    public String products(@RequestParam("id")Integer id, Model model){
+        List<ContentBlocksDto> contentBlocksDtos = productService.findById(id);
+        ProductsDto productsDto = productService.findDetail(id);
+        model.addAttribute("contents", contentBlocksDtos);
+        model.addAttribute("productsDto", productsDto);
+        return "productsViews/productDetail";
     }
-    @GetMapping("/exploratory")
-    public String exploratory(){
-        return "productsViews/exploratory";
-    }
-    @GetMapping("/social")
-    public String social(){
-        return "productsViews/social";
-    }
-    @GetMapping
-    public String productDetail(@RequestParam("id")Long id, Model model){
-        ProductsDto productsDto = productService.findById(id);
-        model.addAttribute("product", productsDto);
-        List<InquiriesDto> inquiriesDto = inquiriesService.findByProductId(id);
-        model.addAttribute("inquiries", inquiriesDto);
-        return "products/productDetail";
-    }
-    @PostMapping("/inquiry/save")
-    public String inquirySave(@ModelAttribute InquiriesDto inquiriesDto){
-        if(inquiriesService.save(inquiriesDto)){
-            return "redirect:/product?id=" + inquiriesDto.getProductId();
-        }else{
-            return "redirect:/product?id=" + inquiriesDto.getProductId();
-        }
-    }
-    @GetMapping("/inquiry/delete")
-    public String inquiryDelete(@RequestParam("inquiryId") Long inquiryId,
-                                @RequestParam("productId") Long productId){
-        inquiriesService.delete(inquiryId);
-        return "redirect:/product?id=" + productId;
-    }
-    @PostMapping("/inquiry/update")
-    public String inquiryUpdate(@ModelAttribute InquiriesDto inquiriesDto,
-                                @RequestParam("productId") Long productId){
-        inquiriesService.update(inquiriesDto);
-        return "redirect:/product?id="+productId;
-    }
+
+//    @PostMapping("/inquiry/save")
+//    public String inquirySave(@ModelAttribute InquiriesDto inquiriesDto){
+//        if(inquiriesService.save(inquiriesDto)){
+//            return "redirect:/product?id=" + inquiriesDto.getProductId();
+//        }else{
+//            return "redirect:/product?id=" + inquiriesDto.getProductId();
+//        }
+//    }
+//    @GetMapping("/inquiry/delete")
+//    public String inquiryDelete(@RequestParam("inquiryId") Long inquiryId,
+//                                @RequestParam("productId") Long productId){
+//        inquiriesService.delete(inquiryId);
+//        return "redirect:/product?id=" + productId;
+//    }
+//    @PostMapping("/inquiry/update")
+//    public String inquiryUpdate(@ModelAttribute InquiriesDto inquiriesDto,
+//                                @RequestParam("productId") Long productId){
+//        inquiriesService.update(inquiriesDto);
+//        return "redirect:/product?id="+productId;
+//    }
 
 }

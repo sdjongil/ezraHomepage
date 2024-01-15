@@ -4,10 +4,12 @@
 
 <mapper namespace="Products">
     <select id="findAll" resultType="product">
-        select * from products_table
+        select * from productsTable
     </select>
-    <select id="findById" parameterType="Long" resultType="product">
-        select * from products_table where id = #{id}
+    <select id="findById" parameterType="Integer" resultType="contentBlocks">
+        select * from contentblocks where productId = #{id} ORDER by blockorder ASC
     </select>
-
+    <select id="findDetail" resultType="product">
+        select * from productsTable where productid = #{id}
+    </select>
 </mapper>

@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
 <!--  Last Published: Tue Jan 02 2024 07:44:22 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="658e8234ef485db1d618dab2" data-wf-site="658e8233ef485db1d618da5a" lang="en">
@@ -20,106 +21,35 @@
 <div id="navbar-container"></div>
 <div style="margin-left: 25px; margin-right: 25px">
     <h3 style="font-size: 30px; color: #d39e00; line-height: 1.4;">
-        샵 페이지는 나를 알리는 블로그로서 저의 개발자 이외의 업적을 상품으로 넣어봤습니다.
-    콘텐츠 블록 형식으로 테이블을 구성하였습니다.</h3>
+        샵 페이지는 나를 알리는 블로그로서 저의 개발자 이외의 저의 활동 등을 상품으로 넣어봤습니다.</h3>
 </div>
 <div id="top" class="section">
     <div class="main-container w-container">
-        <h1 data-w-id="023a4ddb-7d6d-549a-4046-d107cd1afb74" style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); opacity: 1; transform-style: preserve-3d;">Shop ezra's salary</h1>
-        <h4>For projects, check out the board</h4>
+        <h1 data-w-id="023a4ddb-7d6d-549a-4046-d107cd1afb74" style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); opacity: 1; transform-style: preserve-3d;">Ezra Shop</h1>
+        <h4>For projects,Please check out the project board in blog</h4>
         <div class="space-40"></div>
         <div class="w-dyn-list">
             <div role="list" class="grid-thirds products-grid w-dyn-items">
-                <div role="listitem" class="w-dyn-item">
-                    <a href="/product/volunteer" class="link-product w-inline-block">
-                        <div class="image-wrap-product">
-                            <div style="background-image: url('../../../resources/static/images/ezra-image-volunteer2.jpg'); transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;" class="image-product">
+                <c:forEach var="product" items="${productsList}">
+                    <div role="listitem" class="w-dyn-item">
+                        <a href="/product/productDetail?id=${product.productId}" class="link-product w-inline-block">
+                            <div class="image-wrap-product">
+                                <div style="background-image: url('../../../resources/static/images/${product.image}'); transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;" class="image-product">
+                                </div>
                             </div>
-                        </div>
-                        <div class="master-product-details">
-                            <div class="left-product-details">
-                                <div class="text-block-heading-3-styles">Volunteer activity </div>
+                            <div class="master-product-details">
+                                <div class="left-product-details">
+                                    <div class="text-block-heading-3-styles">${product.name}</div>
+                                </div>
+                                <div class="right-product-details">
+                                    <div class="compare-price w-dyn-bind-empty"> </div>
+                                    <div class="text-block-heading-3-styles">
+                                        $&nbsp;${product.price}&nbsp;/year</div>
+                                </div>
                             </div>
-                            <div class="right-product-details">
-                                <div class="compare-price w-dyn-bind-empty"> </div>
-                                <div class="text-block-heading-3-styles">
-                                    $&nbsp;1000&nbsp;/year</div>
-                            </div>
-                        </div>
-                    </a>
-                </div> <!--봉사활동-->
-                <div role="listitem" class="w-dyn-item">
-                    <a href="/product/campus" class="link-product w-inline-block">
-                        <div class="image-wrap-product">
-                            <div style="background-image: url('../../../resources/static/images/ezra-image-Campus1.jpg'); transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;" class="image-product">
-                            </div>
-                        </div>
-                        <div class="master-product-details">
-                            <div class="left-product-details">
-                                <div class="text-block-heading-3-styles">Campus activities</div>
-                            </div>
-                            <div class="right-product-details">
-                                <div class="compare-price w-dyn-bind-empty"> </div>
-                                <div class="text-block-heading-3-styles">
-                                    $&nbsp;1000&nbsp;/year</div>
-                            </div>
-                        </div>
-                    </a>
-                </div> <!--교내활동-->
-                <div role="listitem" class="w-dyn-item"> <!--학습활동-->
-                    <a href="/product/learning" class="link-product w-inline-block">
-                        <div class="image-wrap-product">
-                            <div style="background-image: url('../../../resources/static/images/ezra-image-learning1.jpg'); transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;" class="image-product">
-                            </div>
-                        </div>
-                        <div class="master-product-details">
-                            <div class="left-product-details">
-                                <div class="text-block-heading-3-styles">Learning activities</div>
-                            </div>
-                            <div class="right-product-details">
-                                <div class="compare-price w-dyn-bind-empty"> </div>
-                                <div class="text-block-heading-3-styles">
-                                    $&nbsp;1000&nbsp;/year</div>
-                            </div>
-                        </div>
-                    </a>
-                </div> <!--학습활동-->
-                <div role="listitem" class="w-dyn-item">
-                    <a href="/product/exploratory" class="link-product w-inline-block">
-                        <div class="image-wrap-product">
-                            <div style="background-image: url('../../../resources/static/images/ezra-image-exploratory.JPG'); transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;" class="image-product">
-                            </div>
-                        </div>
-                        <div class="master-product-details">
-                            <div class="left-product-details">
-                                <div class="text-block-heading-3-styles">Exploratory activities</div>
-                            </div>
-                            <div class="right-product-details">
-                                <div class="compare-price w-dyn-bind-empty"> </div>
-                                <div class="text-block-heading-3-styles">
-                                    $&nbsp;1000&nbsp;/year</div>
-                            </div>
-                        </div>
-                    </a>
-                </div>  <!--탐구활동--->
-                <div role="listitem" class="w-dyn-item">
-                    <a href="/product/social" class="link-product w-inline-block">
-                        <div class="image-wrap-product">
-                            <div style="background-image: url('../../../resources/static/images/ezra-image-social1.JPG'); transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;" class="image-product">
-                            </div>
-                        </div>
-                        <div class="master-product-details">
-                            <div class="left-product-details">
-                                <div class="text-block-heading-3-styles">Social activities</div>
-                            </div>
-                            <div class="right-product-details">
-                                <div class="compare-price w-dyn-bind-empty"> </div>
-                                <div class="text-block-heading-3-styles">
-                                    $&nbsp;1000&nbsp;/year</div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+                        </a>
+                    </div>
+                </c:forEach>
             </div>
         </div>
     </div>

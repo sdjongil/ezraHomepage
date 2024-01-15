@@ -16,6 +16,7 @@
         <typeAlias type="com.codingrecipe.member.dto.FilesDto" alias="file"/>
         <typeAlias type="com.codingrecipe.member.dto.ViewsDto" alias="Views"/>
         <typeAlias type="com.codingrecipe.member.dto.LikesDto" alias="Likes"/>
+        <typeAlias type="com.codingrecipe.member.dto.ContentBlocksDto" alias="contentBlocks"/>
     </typeAliases>
 </configuration>
 
