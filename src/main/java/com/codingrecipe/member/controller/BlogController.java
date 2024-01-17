@@ -100,7 +100,6 @@ public class BlogController {
     @GetMapping("/detail")
     public String blogDetail(@RequestParam(value = "id") Integer id, Model model,
                              @CookieValue(name = "auth_token", required = false) String logInToken){
-        //----------------------------------------------------
         String nickname = "anonymous";
         if(logInToken == null || logInToken.isEmpty()){
             model.addAttribute("nickName", nickname);

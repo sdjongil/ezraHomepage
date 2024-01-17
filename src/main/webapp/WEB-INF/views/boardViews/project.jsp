@@ -47,14 +47,21 @@
     </div>
     <div class="space-40"></div>
     <div class="w-dyn-list">
+
       <div role="list" class="list-projects-b w-dyn-items">
         <div role="listitem" class="w-dyn-item">
           <div class="space-40 line-top"></div>
           <div class="top-wrap-project-b" style="margin-bottom: 10px">
-            <div class="text-block-heading-3-styles">English Studying App</div>
-            <div class="text-block-heading-3-styles servie-projects-b">23.11.30</div>
+            <div class="text-block-heading-3-styles">English learning program using API and chatGPT</div>
+            <div class="text-block-heading-3-styles servie-projects-b">23.11.20 ~ 23.11.30</div>
           </div>
-          <a href="http://ezra.dothome.co.kr/" class="link-project-b w-inline-block" target="_blank">
+          <div class="top-wrap-project-b" style="margin-bottom: 10px">
+            <div class="text-block-heading-3-styles">Development Environment : Java, OracleDB, Maven</div>
+          </div>
+          <div class="top-wrap-project-b" style="margin-bottom: 10px">
+            <div class="text-block-heading-3-styles servie-projects-b">Development headcount : one person</div>
+          </div>
+          <a href="https://1drv.ms/p/s!AtTljAm2KsLziWMbMrYwroKz2JXu?e=cX56RP" class="link-project-b w-inline-block" target="_blank">
             <img src="${pageContext.request.contextPath}/resources/static/images/ezra-image-grooming1.jpg" alt="my project"/>
           </a>
           <p class="no-margins">It is an English learning program that combines translation, TTS(Text to speech), and chatGPT technology using 'API'.
@@ -62,6 +69,9 @@
             Don't worry. The best AI teacher will help you.</p>
           <div style="text-align: right; margin-top: 10px">
             <a href="https://github.com/sdjongil/grooming.git" target="_blank">Go to github</a>
+          </div>
+          <div style="text-align: right; margin-top: 10px">
+            <a href="https://1drv.ms/p/s!AtTljAm2KsLziWMbMrYwroKz2JXu?e=cX56RP" target="_blank">Go to PPT</a>
           </div>
         </div>
         <div class="space-40 line-bottom"></div>
@@ -72,8 +82,14 @@
         <div role="listitem" class="w-dyn-item">
           <div class="space-40 line-top"></div>
           <div class="top-wrap-project-b" style="margin-bottom: 10px">
-            <div class="text-block-heading-3-styles">Tower defense</div>
-            <div class="text-block-heading-3-styles servie-projects-b">23.12.13</div>
+            <div class="text-block-heading-3-styles">Tower defense game with the 'Phaser' physics engine</div>
+            <div class="text-block-heading-3-styles servie-projects-b">23.12.11 ~ 23.12.13</div>
+          </div>
+          <div class="top-wrap-project-b" style="margin-bottom: 10px">
+            <div class="text-block-heading-3-styles">Development Environment : Javascript, Html</div>
+          </div>
+          <div class="top-wrap-project-b" style="margin-bottom: 10px">
+            <div class="text-block-heading-3-styles servie-projects-b">Development headcount : one person</div>
           </div>
           <a href="http://ezra.dothome.co.kr/" class="link-project-b w-inline-block" target="_blank">
               <img src="${pageContext.request.contextPath}/resources/static/images/ezra-image-projec2.jpg" alt="my project"/>
