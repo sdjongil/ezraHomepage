@@ -183,10 +183,10 @@
 </script>
 <style>
     #selector {
-        font-size: 28px; /* 원하는 글자 크기로 조절 */
+        font-size: 28px;
     }
     .input-underline option {
-        font-size: 28px; /* 원하는 글자 크기로 조절 */
+        font-size: 28px;
     }
     .userPictureWrap {
         position: relative;

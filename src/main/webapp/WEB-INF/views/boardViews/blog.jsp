@@ -145,16 +145,16 @@
         font-size: 20px;
     }
     #pagination {
-        text-align: center; /* 텍스트를 중앙 정렬 */
-        margin-top: 20px; /* 상단 여백 추가 */
+        text-align: center;
+        margin-top: 20px;
     }
 
     .page-link {
-        margin: 0 5px; /* 링크 간의 간격 */
-        padding: 5px 10px; /* 링크 패딩 */
-        border: 1px solid #ddd; /* 테두리 스타일 */
-        color: #333; /* 텍스트 색상 */
-        text-decoration: none; /* 밑줄 제거 */
+        margin: 0 5px;
+        padding: 5px 10px;
+        border: 1px solid #ddd;
+        color: #333;
+        text-decoration: none;
     }
 
     .active {

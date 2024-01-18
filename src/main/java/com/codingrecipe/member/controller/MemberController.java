@@ -88,15 +88,12 @@ public class MemberController {
     @PostMapping("/email-check")
     //ajax요청 처리할 땐 리스폰스바디, 리스폰스엔티티로 처리해주어야한다.
     @ResponseBody
-    //url의 member/email-check?memberEmail={값}일 때 memberEmail 값을 가져옴
     public String emailCheck(@RequestParam("memberEmail") String memberEmail){
         String checkresult = memberService.emailCheck(memberEmail);
         return checkresult;
     }
     @PostMapping("/nick-check")
-    //ajax요청 처리할 땐 리스폰스바디, 리스폰스엔티티로 처리해주어야한다.
     @ResponseBody
-    //url의 member/email-check?memberEmail={값}일 때 memberEmail 값을 가져옴
     public String nickCheck(@RequestParam("nickName") String nickName){
         String checkresult = memberService.nickCheck(nickName);
         return checkresult;
