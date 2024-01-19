@@ -4,50 +4,38 @@
 
 <mapper namespace="Board">
     <select id="findBlog" resultType="board" parameterType="page">
-        SELECT * FROM ( SELECT board_table.*, ROW_NUMBER()
-            OVER (ORDER BY ${orderBy} ${order}) as rn
-            FROM board_table
-            WHERE ${searchType} Like #{searchKeyword})
-            WHERE rn BETWEEN #{startNo} AND #{endNo}
+        SELECT * FROM board_table
+        WHERE ${searchType} LIKE #{searchKeyword}
+        ORDER BY ${orderBy} ${order}
+        LIMIT #{endNo} OFFSET #{startNo}
+    </select>
+    <select id="findMaxId" resultType="Integer" >
+        SELECT MAX(boardId) FROM board_table
     </select>
     <select id="blogDetail" resultType="board" parameterType="Integer">
-        Select * from board_table where id = #{id}
+        Select * from board_table where boardId = #{boardId}
     </select>
     <select id="searchByTitle" resultType="board" parameterType="String">
-        Select * from board_table where boardTitle like #{title}
+        Select * from board_table where boardTitle like #{boardTitle}
     </select>
     <select id="totalPage" resultType="Integer">
-        select count (*) from board_table
+        select count(*) from board_table
     </select>
     <insert id="postBlog" parameterType="board">
-        insert into board_table(id, boardWriter, boardTitle, boardContents, category, isFile)
-        values (seq_board.NEXTVAL, #{boardWriter}, #{boardTitle}, #{boardContents},#{category},#{isFile})
+        insert into board_table(boardWriter, boardTitle, boardContents, boardCategory, boardIsFile)
+        values (#{boardWriter}, #{boardTitle}, #{boardContents},#{boardCategory},#{boardIsFile})
     </insert>
-    <select id="findMaxId" resultType="Integer" >
-        SELECT MAX(TO_NUMBER(id)) FROM board_table
-    </select>
     <update id="increaseView" parameterType="Integer">
-        update board_table set views= views +1 where id = #{id}
+        update board_table set boardViews= boardViews +1 where boardId = #{boardId}
     </update>
     <update id="increaseLike" parameterType="Integer">
-        update board_table set boardHits = boardHits + 1 where id = #{id}
+        update board_table set boardHits = boardHits + 1 where boardId = #{boardId}
     </update>
     <delete id="deleteBlog">
-        delete from board_table where id = #{id}
+        delete from board_table where boardId = #{boardId}
     </delete>
     <update id="updateBlog" parameterType="board">
         update board_table set boardTitle = #{boardTitle}, boardContents = #{boardContents},
-                               category = #{category}, isFile = #{isFile} where id = #{id}
+                               boardCategory = #{boardCategory}, boardIsFile = #{boardIsFile} where boardId = #{boardId}
     </update>
 </mapper>
-
-
-
-
-
-
-
-
-
-
-

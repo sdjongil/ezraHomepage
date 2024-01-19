@@ -59,7 +59,7 @@
             </label>
             <label style="font-size: 28px">Writer : ${board.boardWriter}</label>
             <input type="hidden" id="nickName" name="nickName" value="${board.boardWriter}">
-            <input type="hidden" id="boardId" name="boardId" value="${board.id}">
+            <input type="hidden" id="boardId" name="boardId" value="${board.boardId}">
         </div>
         <div class="w-commerce-commercecheckoutblockcontent block-content">
             <label for="title" >Title: </label>
@@ -199,12 +199,12 @@
                 formData.append('deleteFile', file);
             })
         }
-        formData.append('isFile', isFile);
-        formData.append('id',boardId);
+        formData.append('boardIsFile', isFile);
+        formData.append('boardId',boardId);
         formData.append('boardTitle', title);
         formData.append('boardContents', content);
         formData.append('boardWriter', nickName);
-        formData.append('category', category);
+        formData.append('boardCategory', category);
 
         fetch('/blog/updateBlog', {
             method: 'POST',

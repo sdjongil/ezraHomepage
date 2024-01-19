@@ -50,7 +50,7 @@
     <form id="blogPost" action="/blog/postBlog" method="post" enctype="multipart/form-data">
         <div  class="w-commerce-commercecheckoutblockheader block-header">
             <label>
-                <select id="selector" name="category"   class="input-underline w-input">
+                <select id="selector" name="boardCategory"   class="input-underline w-input">
                     <option value="english_study">English Study</option>
                     <option value="casual_talk">Casual Talk</option>
                     <option value="tech_study">Tech Study</option>
@@ -58,16 +58,16 @@
                 </select>
             </label>
             <label style="font-size: 28px">Writer : ${nickName}</label>
-            <input type="hidden" id="nickName" name="nickName" value="${nickName}">
+            <input type="hidden" id="nickName" name="boardNickname" value="${nickName}">
         </div>
         <div class="w-commerce-commercecheckoutblockcontent block-content">
             <label for="title" >Title:</label>
-            <input class="input-underline w-input" type="text" id="title" name="title" required>
+            <input class="input-underline w-input" type="text" id="title" name="boardTitle" required>
         </div>
         <div class="w-commerce-commercecheckoutblockcontent block-content">
             <div  id="drop-area">
             <label for="content">Content:</label>
-            <textarea class="input-underline w-input" id="content" name="content" rows="6"
+            <textarea class="input-underline w-input" id="content" name="boardContent" rows="6"
                       cols="50" required></textarea>
             </div>
         </div>
@@ -158,7 +158,7 @@
         formData.append('boardTitle', title);
         formData.append('boardContents', content);
         formData.append('boardWriter', nickName);
-        formData.append('category', category);
+        formData.append('boardCategory', category);
 
         fetch('/blog/postBlog', {
             method: 'POST',
@@ -178,7 +178,6 @@
             });
         });
     })
-
 
 </script>
 <style>

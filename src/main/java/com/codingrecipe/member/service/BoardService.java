@@ -87,7 +87,7 @@ public class BoardService{
 
     public boolean deletePost(Integer boardId) {
         BoardDto boardDto = boardRepository.blogDetail(boardId);
-        if (boardDto.getIsFile().equals("T")){
+        if (boardDto.getBoardIsFile().equals("T")){
             try {
                 List<FilesDto> filesDtos = boardRepository.findFilesById(boardId);
                 if(!filesDtos.isEmpty()){

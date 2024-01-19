@@ -11,7 +11,7 @@ export class PageDto{
         this.endNo = null;            // 현재 목록에서 끝 게시물 id
         this.prev = null;             // 이전 페이지 유무
         this.next = null;             // 다음 페이지 유무
-        this.searchType = "category"; // 검색 칼럼
+        this.searchType = "boardCategory"; // 검색 칼럼
         this.orderBy = "boardcreatedtime"; // 정렬 기준
         this.order = "desc";          // 정렬 순서 (오름차순, 내림차순)
         this.searchKeyword = "%";     // 검색 키워드

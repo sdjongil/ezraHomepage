@@ -78,24 +78,12 @@
                 ${userAlreadyLiked ? 'background-color: darkgray;' : ''}"${userAlreadyLiked ? 'disabled' : ''}>Like
                         <div id="likeNum" style="display: flex;margin-left: 3px;">${board.boardHits}</div>
                     </div>
-                    <div style="display: inline-block; text-align: center; flex-grow: 1;">Views : ${board.views}</div>
+                    <div style="display: inline-block; text-align: center; flex-grow: 1;">Views : ${board.boardViews}</div>
                     <div data-board-writer="${board.boardWriter}" style="display: inline-block; text-align: right;"> By : ${board.boardWriter}</div>
-                    <div data-board-id="${board.id}" style="display: none;">${board.id}</div>
+                    <div data-board-id="${board.boardId}" style="display: none;">${board.boardId}</div>
                     <div id="viewer" style="display: none">${nickName}</div>
                 </div>
                 <div class="space-40 line-bottom"></div>
-<%--                <div id="bottomBlog">--%>
-<%--                    <div class="comment-container">--%>
-<%--                        <div class="user-image" style="width: 13%">--%>
-<%--                            <img src="../../../resources/static/images/ezra-image-home.jpg" alt="User Image">--%>
-<%--                        </div>--%>
-<%--                        <div style="width: 65%;">--%>
-<%--                            <textarea class="input-underline text-area comment-box" style="width: 100%;"--%>
-<%--                                      placeholder="Leave a comment..."></textarea>--%>
-<%--                        </div>--%>
-<%--                        <button class="cta big-submit w-button" style="width: 20%">Comment</button>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
             </div>
         </div>
     </div>
@@ -150,7 +138,7 @@
         if (this.hasAttribute('disabled')) {
             alert('You already liked it.');
         } else {
-            fetch("/blog/updateLike?nick="+viewer+"&id="+boardId, {
+            fetch("/blog/updateLike?nick="+viewer+"&boardId="+boardId, {
                 method: 'GET'
             }).then(response => {
                 if (!response.ok) {
@@ -172,10 +160,10 @@
     let protects = [];
     protects = document.getElementsByClassName("protected")
     protects[0].addEventListener('click', function (){
-        window.location.href = "/protected/?nick="+boardWriter+"&id="+boardId+"&forWhat=Edit post";
+        window.location.href = "/protected/?nick="+boardWriter+"&boardId="+boardId+"&forWhat=Edit post";
     })
     protects[1].addEventListener('click', function (){
-        window.location.href = "/protected/?nick="+boardWriter+"&id="+boardId+"&forWhat=Delete post";
+        window.location.href = "/protected/?nick="+boardWriter+"&boardId="+boardId+"&forWhat=Delete post";
     })
 
 </script>

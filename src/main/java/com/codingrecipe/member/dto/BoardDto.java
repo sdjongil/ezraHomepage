@@ -10,13 +10,13 @@ import java.sql.Timestamp;
 @Setter
 @ToString
 public class BoardDto {
-    private Long id;
+    private Integer boardId;
     private String boardWriter;
     private String boardTitle;
     private String boardContents;
     private Integer boardHits;
     private Timestamp boardCreatedTime;
-    private Integer views;
-    private String category;
-    private String isFile;
+    private Integer boardViews;
+    private String boardCategory;
+    private String boardIsFile;
 }

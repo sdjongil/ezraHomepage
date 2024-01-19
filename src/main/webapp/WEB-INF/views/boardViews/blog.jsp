@@ -98,14 +98,14 @@
                                 <c:forEach items="${boardList}" var="board" varStatus="status">
                                     <tr class="userBoard" style="background-color:${status.index % 2 == 0 ? "#000000;" : "#101005;"}; display: flex;
                                             margin-top: 5px; padding: 5px">
-                                        <td>${board.category}</td>
-                                        <td id="userTitle"><a style="text-decoration: none;" href="/blog/detail?id=${board.id}">${board.boardTitle}</a></td>
+                                        <td>${board.boardCategory}</td>
+                                        <td id="userTitle"><a style="text-decoration: none;" href="/blog/detail?boardId=${board.boardId}">${board.boardTitle}</a></td>
                                         <td>${board.boardWriter}</td>
                                         <td>
                                             <fmt:formatDate value="${board.boardCreatedTime}" pattern="yy-MM-dd" />
                                         </td>
                                         <td>${board.boardHits}</td>
-                                        <td>${board.views}</td>
+                                        <td>${board.boardViews}</td>
                                     </tr>
                                 </c:forEach>
                             </tbody>
@@ -178,27 +178,20 @@
 
     //페이징
     let pageDto;
-    if(sessionStorage.getItem('pageDto')===null){
-        fetch('/blog/blogTotal').then(response =>{
-            if(!response.ok){
-                throw new Error('Network response error')
-            }
-            return response.text()
-        }).then(count =>{
-            pageDto = new PageDto(count)
-            pageDto.calculatePageDto()
-            createPagination(pageDto);
-            sessionStorage.setItem("pageDto", JSON.stringify(pageDto))
-        }).catch(error=>{
-            console.log("Fetch error : " + error);
-        })
-    }else{
-        let storedData = sessionStorage.getItem("pageDto");
-        let data = JSON.parse(storedData);
-        pageDto = new PageDto(data.totalCount);
-        Object.assign(pageDto, data); // 저장된 데이터를 pageDto 인스턴스에 복사
+    fetch('/blog/blogTotal').then(response =>{
+        if(!response.ok){
+            throw new Error('Network response error')
+        }
+        return response.text()
+    }).then(count =>{
+        pageDto = new PageDto(count)
+        pageDto.calculatePageDto()
         createPagination(pageDto);
-    }
+        sessionStorage.setItem("pageDto", JSON.stringify(pageDto))
+    }).catch(error=>{
+        console.log("Fetch error : " + error);
+    })
+
     function createPagination(pageDto) {
         const paginationContainer = document.getElementById('pagination');
         addPageLink(paginationContainer, 1, true);
@@ -264,6 +257,7 @@
             const href = "/blog/?startNo="+pageDto.startNo+"&endNo="+pageDto.endNo+"&perPageNum="+pageDto.perPageNum+
                 "&searchType="+pageDto.searchType+"&searchKeyword="+pageDto.searchKeyword+"&orderBy="+
                 pageDto.orderBy+"&order="+pageDto.order;
+            console.log(href)
             window.location.href = href;
         })
     });
@@ -281,6 +275,8 @@
             option = 'boardcreatedtime';
         }else if(option === 'likes'){
             option = 'boardHits'
+        }else if(option === 'views'){
+            option = 'boardViews'
         }
         pageDto.orderBy = option;
         document.getElementById("options").style.display = "none";

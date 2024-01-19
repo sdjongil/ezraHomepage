@@ -39,7 +39,7 @@
                 <div style="margin-top: 20px;" id="info">
                     <div>
                         <div>Post Number : </div>
-                        <div id="boardId">${boardDto.id}</div>
+                        <div id="boardId">${boardDto.boardId}</div>
                     </div>
                     <div>
                         <div>Writer : </div>

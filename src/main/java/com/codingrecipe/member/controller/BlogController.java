@@ -71,7 +71,7 @@ public class BlogController {
                                       @RequestParam(name = "fileData", required = false) MultipartFile[] files){
         //게시물 저장과 동시에 id값 가져옴
         if(files == null){
-            boardDto.setIsFile("F");
+            boardDto.setBoardIsFile("F");
             int result = boardService.postBlog(boardDto);
             if((result>0)){
                 return ResponseEntity.ok().body("{\"status\": \"success\", \"redirect\": \"/blog/\"}");
@@ -79,7 +79,7 @@ public class BlogController {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"status\": \"failure\", \"redirect\": \"/blog/writeBlog\"}");
             }
         }else{
-            boardDto.setIsFile("T");
+            boardDto.setBoardIsFile("T");
             //result = 게시물 번호로 리턴
             int result = boardService.postBlog(boardDto);
             if((result>0)){
@@ -97,27 +97,30 @@ public class BlogController {
     }
 
     @GetMapping("/detail")
-    public String blogDetail(@RequestParam(value = "id") Integer id, Model model,
+    public String blogDetail(@RequestParam(value = "boardId") Integer boardId, Model model,
                              @CookieValue(name = "auth_token", required = false) String logInToken){
         String nickname = "anonymous";
+        boolean userAlreadyLiked = true;
+        LikesDto likesDto = new LikesDto();
+        BoardDto boardDto =  boardService.blogDetail(boardId);
         if(logInToken == null || logInToken.isEmpty()){
             model.addAttribute("nickName", nickname);
         }else{
             try{
+                boardService.updateViews(boardId);
                 nickname = JwtUtil.parsingJwt(logInToken, secretKey);
+                Integer memberId = memberService.findByNick(nickname).getMemberId();
+                likesDto.setMemberId(memberId);
+                likesDto.setBoardId(boardId);
+                userAlreadyLiked = boardService.findLike(likesDto);
                 model.addAttribute("nickName", nickname);
             }catch (Exception e){
                 log.error(String.valueOf(e));
             }
         }
-        boardService.updateViews(id);
-        BoardDto boardDto = boardService.blogDetail(id);
-        LikesDto likesDto = new LikesDto();
-        likesDto.setMemberNickname(nickname);
-        likesDto.setBoardId(id);
-        boolean userAlreadyLiked = boardService.findLike(likesDto);
-        if (boardDto.getIsFile().equals("T")) {
-            List<FilesDto> filesDtos = boardService.findFilesById(id);
+
+        if (boardDto.getBoardIsFile().equals("T")) {
+            List<FilesDto> filesDtos = boardService.findFilesById(boardId);
             model.addAttribute("files",filesDtos);
         }
         model.addAttribute("board",boardDto);
@@ -126,10 +129,11 @@ public class BlogController {
     }
     @GetMapping("/updateLike")
     public ResponseEntity<?> saveLike(@RequestParam(value = "nick") String nick,
-                                      @RequestParam(value = "id") Integer id){
+                                      @RequestParam(value = "boardId") Integer id){
+        Integer memberId = memberService.findByNick(nick).getMemberId();
         LikesDto likesDto = new LikesDto();
         likesDto.setBoardId(id);
-        likesDto.setMemberNickname(nick);
+        likesDto.setMemberId(memberId);
         if(boardService.saveLike(likesDto)>0){
             boardService.increaseLike(id);
             return ResponseEntity.ok("success");
@@ -162,7 +166,7 @@ public class BlogController {
     @GetMapping("/edit")
     public String editPage(Model model, @RequestParam("id")Integer boardId) throws JsonProcessingException {
         BoardDto boardDto = boardService.blogDetail(boardId);
-        if (boardDto.getIsFile().equals("T")) {
+        if (boardDto.getBoardIsFile().equals("T")) {
             List<FilesDto> filesDtos = boardService.findFilesById(boardId);
             ObjectMapper mapper = new ObjectMapper();
             String filesJson = mapper.writeValueAsString(filesDtos);
@@ -182,7 +186,7 @@ public class BlogController {
         }
         //새로운 파일있을 시 저장
         if(files != null){
-            int id = Math.toIntExact(boardDto.getId());
+            int id = Math.toIntExact(boardDto.getBoardId());
             boardService.saveFile(files, id);
         }
         //기존 파일 삭제했을 시 삭제

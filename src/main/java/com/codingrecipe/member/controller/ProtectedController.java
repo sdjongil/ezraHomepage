@@ -17,7 +17,7 @@ public class ProtectedController {
     @GetMapping("/")
     public String protectedEdit(Model model, @CookieValue(name = "auth_token",
             required = false) String loginToken,
-                                @RequestParam(value = "id")Integer boardId,
+                                @RequestParam(value = "boardId")Integer boardId,
                                 @RequestParam(value = "nick")String nick,
                                 @RequestParam(value = "forWhat")String forWhat){
         if(loginToken == null || loginToken.isEmpty()){
@@ -30,7 +30,7 @@ public class ProtectedController {
             String nickName = JwtUtil.parsingJwt(loginToken, secretKey);
             if(nickName.equals(nick)){
                 boardDto.setBoardWriter(nickName);
-                boardDto.setId(Long.valueOf(boardId));
+                boardDto.setBoardId(boardId);
                 model.addAttribute("boardDto", boardDto);
                 model.addAttribute("forWhat", forWhat);
                 return "protectedPage";

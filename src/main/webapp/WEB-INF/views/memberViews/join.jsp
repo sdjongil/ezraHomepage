@@ -52,7 +52,7 @@
                         <input id="memberEmail" type="email" class="input-underline w-input" maxlength="30"
                                name="memberEmail" placeholder="Email" autocomplete="off"  onblur="emailCheck()">
                         <input id="memberNickName" type="text" class="input-underline w-input" maxlength="20"
-                               name="NickName" placeholder="NickName" autocomplete="off" onblur="nickCheck()">
+                               name="memberNickname" placeholder="NickName" autocomplete="off" onblur="nickCheck()">
                         <h5>Your nickname must be a English letters of 4 to 20.</h5>
                         <input id="password" type="password" class="input-underline w-input" maxlength="25"
                                name="memberPassword" placeholder="Password">

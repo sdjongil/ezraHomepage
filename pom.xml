@@ -209,12 +209,18 @@
     <!-- https://mvnrepository.com/artifact/com.oracle.ojdbc/orai18n
      ojdbc8.jar에서 사용하는 인코딩 방식이 jdbc에서 사용하는 방식이 아니기 때문에 충돌-->
 
-    <dependency>
-      <groupId>com.oracle.ojdbc</groupId>
-      <artifactId>orai18n</artifactId>
-      <version>19.3.0.0</version>
-    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>com.oracle.ojdbc</groupId>-->
+<!--      <artifactId>orai18n</artifactId>-->
+<!--      <version>19.3.0.0</version>-->
+<!--    </dependency>-->
 
+    <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>8.0.33</version>
+    </dependency>
 
   </dependencies>
 

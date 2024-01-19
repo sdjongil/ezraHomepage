@@ -46,7 +46,7 @@ public class MemberController {
                         HttpServletResponse httpServletResponse){
         MemberDto loginResult = memberService.login(memberDto);
         if(loginResult != null){ // 로그인 성공
-            String logInToken = JwtUtil.createJwt(loginResult.getNickName(),secretKey, expiredMs);
+            String logInToken = JwtUtil.createJwt(loginResult.getMemberNickname(),secretKey, expiredMs);
             Cookie cookie = JwtUtil.createCookie(logInToken, expiredMs);
             httpServletResponse.addCookie(cookie); // 쿠키 추가
             return "ok";

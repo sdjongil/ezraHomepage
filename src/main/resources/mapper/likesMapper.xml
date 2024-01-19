@@ -4,10 +4,10 @@
 
 <mapper namespace="Likes" >
     <insert id="saveLike" parameterType="likes">
-        insert into likes_table(likeId, boardId, memberNickname)
-        values (likes_seq.nextval, #{boardId}, #{memberNickname})
+        insert into likes_table(boardId, memberId)
+        values (#{boardId}, #{memberId})
     </insert>
     <select id="findLike" parameterType="likes" resultType="Integer">
-        select * from likes_table where boardId = #{boardId} and memberNickname = #{memberNickname}
+        select * from likes_table where boardId = #{boardId} and memberId = #{memberId}
     </select>
 </mapper>

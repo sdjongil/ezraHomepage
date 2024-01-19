@@ -11,10 +11,10 @@ import java.util.ArrayList;
 @ToString
 public class PageDto {
     private Integer page = 1;
-    private Integer startNo = 1;
+    private Integer startNo = 0;
     private Integer endNo = 10;
     private Integer perPageNum = 5;
-    private String searchType = "category";
+    private String searchType = "boardCategory";
     private String searchKeyword ="%";
     private String orderBy = "boardcreatedtime";
     private String order ="desc";
