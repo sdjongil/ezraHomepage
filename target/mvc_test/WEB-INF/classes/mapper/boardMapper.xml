@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Board">
+    <select id="findBlog" resultType="board" parameterType="page">
+        SELECT * FROM board_table
+        WHERE ${searchType} LIKE #{searchKeyword}
+        ORDER BY ${orderBy} ${order}
+        LIMIT #{endNo} OFFSET #{startNo}
+    </select>
+    <select id="findMaxId" resultType="Integer" >
+        SELECT MAX(boardId) FROM board_table
+    </select>
+    <select id="blogDetail" resultType="board" parameterType="Integer">
+        Select * from board_table where boardId = #{boardId}
+    </select>
+    <select id="searchByTitle" resultType="board" parameterType="String">
+        Select * from board_table where boardTitle like #{boardTitle}
+    </select>
+    <select id="totalPage" resultType="Integer">
+        select count(*) from board_table
+    </select>
+    <insert id="postBlog" parameterType="board">
+        insert into board_table(boardWriter, boardTitle, boardContents, boardCategory, boardIsFile)
+        values (#{boardWriter}, #{boardTitle}, #{boardContents},#{boardCategory},#{boardIsFile})
+    </insert>
+    <update id="increaseView" parameterType="Integer">
+        update board_table set boardViews= boardViews +1 where boardId = #{boardId}
+    </update>
+    <update id="increaseLike" parameterType="Integer">
+        update board_table set boardHits = boardHits + 1 where boardId = #{boardId}
+    </update>
+    <delete id="deleteBlog">
+        delete from board_table where boardId = #{boardId}
+    </delete>
+    <update id="updateBlog" parameterType="board">
+        update board_table set boardTitle = #{boardTitle}, boardContents = #{boardContents},
+                               boardCategory = #{boardCategory}, boardIsFile = #{boardIsFile} where boardId = #{boardId}
+    </update>
+</mapper>

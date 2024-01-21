@@ -7,9 +7,9 @@
         select * from productsTable
     </select>
     <select id="findById" parameterType="Integer" resultType="contentBlocks">
-        select * from contentblocks where productId = #{id} ORDER by blockorder ASC
+        select * from contentBlocks where productId = #{id} ORDER by blockOrder ASC
     </select>
     <select id="findDetail" resultType="product">
-        select * from productsTable where productid = #{id}
+        select * from productsTable where productId = #{id}
     </select>
 </mapper>

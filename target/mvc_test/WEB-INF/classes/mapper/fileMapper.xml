@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="File">
+    <insert id="save" parameterType="file">
+        insert into board_files (fileName, boardId, fileExtension)
+        values (#{fileName},#{boardId},#{fileExtension})
+    </insert>
+    <select id="findByBoardId" parameterType="file" resultType="file">
+        select * from board_files where boardId = #{boardId}
+    </select>
+    <delete id="deleteFiles" parameterType="Integer">
+        delete from board_files where boardId = #{boardId}
+    </delete>
+    <delete id="deleteFileByFileName" parameterType="String">
+        delete from board_files where fileName = #{fileName}
+    </delete>
+</mapper>

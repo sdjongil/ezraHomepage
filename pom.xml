@@ -8,7 +8,6 @@
   <artifactId>project01</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
-
   <name>project01 Maven Webapp</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
@@ -20,10 +19,16 @@
     <java-version>11</java-version>
     <org.springframework-version>5.3.2</org.springframework-version>
     <org.slf4j-version>1.7.25</org.slf4j-version>
-<!--    5.3.20-->
   </properties>
 
+
   <dependencies>
+<!--      <dependency>-->
+<!--          <groupId>org.springframework.boot</groupId>-->
+<!--          <artifactId>spring-boot-starter-tomcat</artifactId>-->
+<!--          <scope>provided</scope>-->
+<!--      </dependency>-->
+
     <!-- Spring -->
     <dependency>
       <groupId>org.springframework</groupId>
@@ -56,7 +61,6 @@
       <artifactId>spring-context-support</artifactId>
       <version>${org.springframework-version}</version>
     </dependency>
-
 
     <!-- Logging -->
     <dependency>
@@ -139,8 +143,6 @@
       <version>3.2.0</version>
     </dependency>
 
-
-
     <!-- fileupload -->
     <dependency>
       <groupId>commons-fileupload</groupId>
@@ -208,12 +210,6 @@
 
     <!-- https://mvnrepository.com/artifact/com.oracle.ojdbc/orai18n
      ojdbc8.jar에서 사용하는 인코딩 방식이 jdbc에서 사용하는 방식이 아니기 때문에 충돌-->
-
-<!--    <dependency>-->
-<!--      <groupId>com.oracle.ojdbc</groupId>-->
-<!--      <artifactId>orai18n</artifactId>-->
-<!--      <version>19.3.0.0</version>-->
-<!--    </dependency>-->
 
     <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
     <dependency>

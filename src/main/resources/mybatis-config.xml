@@ -17,4 +17,3 @@
         <typeAlias type="com.codingrecipe.member.dto.ContentBlocksDto" alias="contentBlocks"/>
     </typeAliases>
 </configuration>
-
